@@ -1,0 +1,474 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+                              /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o (exit)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x0000000000000000 0x0000000000001000 xr
+data             0x0000000000800060 0x0000000000000100 rw !x
+eeprom           0x0000000000810000 0x0000000000000100 rw !x
+fuse             0x0000000000820000 0x0000000000000003 rw !x
+lock             0x0000000000830000 0x0000000000000400 rw !x
+signature        0x0000000000840000 0x0000000000000400 rw !x
+user_signatures  0x0000000000850000 0x0000000000000400 rw !x
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/libm.a
+LOAD test_i2cmaster.o
+LOAD i2cmaster.o
+START GROUP
+LOAD /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/libm.a
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/libc.a
+LOAD /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/libattiny45.a
+END GROUP
+                0x0000000000000000                __TEXT_REGION_ORIGIN__ = DEFINED (__TEXT_REGION_ORIGIN__)?__TEXT_REGION_ORIGIN__:0x0
+                [0x0000000000800060]                __DATA_REGION_ORIGIN__ = DEFINED (__DATA_REGION_ORIGIN__)?__DATA_REGION_ORIGIN__:0x800060
+                [0x0000000000001000]                __TEXT_REGION_LENGTH__ = DEFINED (__TEXT_REGION_LENGTH__)?__TEXT_REGION_LENGTH__:0x2000
+                [0x0000000000000100]                __DATA_REGION_LENGTH__ = DEFINED (__DATA_REGION_LENGTH__)?__DATA_REGION_LENGTH__:0xffa0
+                [0x0000000000000100]                __EEPROM_REGION_LENGTH__ = DEFINED (__EEPROM_REGION_LENGTH__)?__EEPROM_REGION_LENGTH__:0x10000
+                [0x0000000000000003]                __FUSE_REGION_LENGTH__ = DEFINED (__FUSE_REGION_LENGTH__)?__FUSE_REGION_LENGTH__:0x400
+                0x0000000000000400                __LOCK_REGION_LENGTH__ = DEFINED (__LOCK_REGION_LENGTH__)?__LOCK_REGION_LENGTH__:0x400
+                0x0000000000000400                __SIGNATURE_REGION_LENGTH__ = DEFINED (__SIGNATURE_REGION_LENGTH__)?__SIGNATURE_REGION_LENGTH__:0x400
+                0x0000000000000400                __USER_SIGNATURE_REGION_LENGTH__ = DEFINED (__USER_SIGNATURE_REGION_LENGTH__)?__USER_SIGNATURE_REGION_LENGTH__:0x400
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x0000000000000000      0x16e
+ *(.vectors)
+ .vectors       0x0000000000000000       0x1e /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+                0x0000000000000000                __vectors
+                0x0000000000000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+                0x000000000000001e                . = ALIGN (0x2)
+                0x000000000000001e                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x000000000000001e        0x0 linker stubs
+ *(.trampolines*)
+                0x000000000000001e                __trampolines_end = .
+ *libprintf_flt.a:*(.progmem.data)
+ *libc.a:*(.progmem.data)
+ *(.progmem*)
+                0x000000000000001e                . = ALIGN (0x2)
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x000000000000001e                __ctors_start = .
+ *(.ctors)
+                0x000000000000001e                __ctors_end = .
+                0x000000000000001e                __dtors_start = .
+ *(.dtors)
+                0x000000000000001e                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x000000000000001e        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+                0x000000000000001e                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x000000000000001e        0xc /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x000000000000002a        0x4 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ *(.init9)
+ *(.text)
+ .text          0x000000000000002e        0x2 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+                0x000000000000002e                __vector_1
+                0x000000000000002e                __vector_12
+                0x000000000000002e                __bad_interrupt
+                0x000000000000002e                __vector_6
+                0x000000000000002e                __vector_3
+                0x000000000000002e                __vector_11
+                0x000000000000002e                __vector_13
+                0x000000000000002e                __vector_7
+                0x000000000000002e                __vector_5
+                0x000000000000002e                __vector_4
+                0x000000000000002e                __vector_9
+                0x000000000000002e                __vector_2
+                0x000000000000002e                __vector_8
+                0x000000000000002e                __vector_14
+                0x000000000000002e                __vector_10
+ .text          0x0000000000000030        0x0 test_i2cmaster.o
+ .text          0x0000000000000030       0xcc i2cmaster.o
+                0x000000000000003e                i2c_init
+                0x0000000000000048                i2c_start
+                0x0000000000000050                i2c_rep_start
+                0x0000000000000064                i2c_start_wait
+                0x0000000000000078                i2c_stop
+                0x0000000000000088                i2c_write
+                0x00000000000000c0                i2c_readNak
+                0x00000000000000c4                i2c_readAck
+                0x00000000000000c6                i2c_read
+ .text          0x00000000000000fc        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+                0x00000000000000fc                . = ALIGN (0x2)
+ *(.text.*)
+ .text.startup  0x00000000000000fc       0x6e test_i2cmaster.o
+                0x00000000000000fc                main
+ .text.libgcc.mul
+                0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ .text.libgcc   0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ .text.libgcc.fixed
+                0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+                0x000000000000016a                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000000000000016a        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+                0x000000000000016a                exit
+                0x000000000000016a                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000000000000016a        0x4 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ *(.fini0)
+                0x000000000000016e                _etext = .
+
+.data           0x0000000000800060        0x0 load address 0x000000000000016e
+                [!provide]                        PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ .data          0x0000000000800060        0x0 test_i2cmaster.o
+ .data          0x0000000000800060        0x0 i2cmaster.o
+ .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ *(.data*)
+ *(.gnu.linkonce.d*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.r*)
+                0x0000000000800060                . = ALIGN (0x2)
+                0x0000000000800060                _edata = .
+                [!provide]                        PROVIDE (__data_end, .)
+
+.bss            0x0000000000800060        0x0
+                [!provide]                        PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ .bss           0x0000000000800060        0x0 test_i2cmaster.o
+ .bss           0x0000000000800060        0x0 i2cmaster.o
+ .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+ *(.bss*)
+ *(COMMON)
+                [!provide]                        PROVIDE (__bss_end, .)
+                0x000000000000016e                __data_load_start = LOADADDR (.data)
+                0x000000000000016e                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x0000000000800060        0x0
+                [!provide]                        PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                [!provide]                        PROVIDE (__noinit_end, .)
+                0x0000000000800060                _end = .
+                [!provide]                        PROVIDE (__heap_start, .)
+
+.eeprom         0x0000000000810000        0x0
+ *(.eeprom*)
+                0x0000000000810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.user_signatures
+ *(.user_signatures*)
+
+.stab           0x0000000000000000       0x24
+ *(.stab)
+ .stab          0x0000000000000000       0x24 i2cmaster.o
+
+.stabstr        0x0000000000000000        0xd
+ *(.stabstr)
+ .stabstr       0x0000000000000000        0xd i2cmaster.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x11
+ *(.comment)
+ .comment       0x0000000000000000       0x11 test_i2cmaster.o
+                                         0x12 (size before relaxing)
+
+.note.gnu.avr.deviceinfo
+                0x0000000000000000       0x3c
+ .note.gnu.avr.deviceinfo
+                0x0000000000000000       0x3c /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000       0x40
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 test_i2cmaster.o
+ .debug_aranges
+                0x0000000000000020       0x20 i2cmaster.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x0000000000000000      0x71a
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x420 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ .debug_info    0x0000000000000420      0x28f test_i2cmaster.o
+ .debug_info    0x00000000000006af       0x6b i2cmaster.o
+
+.debug_abbrev   0x0000000000000000      0x499
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x3e8 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ .debug_abbrev  0x00000000000003e8       0x9d test_i2cmaster.o
+ .debug_abbrev  0x0000000000000485       0x14 i2cmaster.o
+
+.debug_line     0x0000000000000000      0x3e0
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x0000000000000000       0x1a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ .debug_line    0x000000000000001a      0x12e test_i2cmaster.o
+ .debug_line    0x0000000000000148      0x298 i2cmaster.o
+
+.debug_frame    0x0000000000000000       0x24
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000       0x24 test_i2cmaster.o
+
+.debug_str      0x0000000000000000      0x2dc
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x169 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+ .debug_str     0x0000000000000169      0x173 test_i2cmaster.o
+                                        0x1a7 (size before relaxing)
+
+.debug_loc      0x0000000000000000       0x66
+ *(.debug_loc)
+ .debug_loc     0x0000000000000000       0x66 test_i2cmaster.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x0000000000000000       0x10
+ *(.debug_ranges)
+ .debug_ranges  0x0000000000000000       0x10 test_i2cmaster.o
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(test_i2cmaster.elf elf32-avr)
+LOAD linker stubs
+
+Cross Reference Table
+
+Symbol                                            File
+__DATA_REGION_LENGTH__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__DATA_REGION_ORIGIN__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__EEPROM_REGION_LENGTH__                          /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__FUSE_REGION_LENGTH__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__TEXT_REGION_LENGTH__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__bad_interrupt                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__heap_end                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__init                                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__stack                                           /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_1                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_10                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_11                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_12                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_13                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_14                                       /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_2                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_3                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_4                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_5                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_6                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_7                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_8                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_9                                        /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vector_default                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+__vectors                                         /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+_exit                                             /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+exit                                              /usr/lib/gcc/avr/5.4.0/avr25/libgcc.a(_exit.o)
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
+i2c_init                                          i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_read                                          i2cmaster.o
+i2c_readAck                                       i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_readNak                                       i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_rep_start                                     i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_start                                         i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_start_wait                                    i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_stop                                          i2cmaster.o
+                                                  test_i2cmaster.o
+i2c_write                                         i2cmaster.o
+                                                  test_i2cmaster.o
+main                                              test_i2cmaster.o
+                                                  /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr25/crtattiny45.o
