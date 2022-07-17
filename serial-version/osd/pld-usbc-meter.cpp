@@ -441,6 +441,14 @@ int main ( int argc, char **argv ) {
 	SDL_Surface *surface, *surface_2;
 	SDL_Texture *texture, *texture_2;
 
+#define DATA_BUFFER_SIZE 500 
+
+	double vdata[DATA_BUFFER_SIZE];
+	double adata[DATA_BUFFER_SIZE];
+	int32_t buffer_start, buffer_end;
+	double vscale = 1.0;
+	double ascale = 1.0;
+
 	char linetmp[SSIZE]; // temporary string for building main line of text
 
 	struct glb g;        // Global structure for passing variables around
@@ -498,6 +506,7 @@ int main ( int argc, char **argv ) {
 
 	if (g.wx_forced) g.window_width = g.wx_forced;
 	if (g.wy_forced) g.window_height = g.wy_forced;
+	 
 
 	SDL_Window *window = SDL_CreateWindow("PLD USB-C Meter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, g.window_width, g.window_height, 0);
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
@@ -512,6 +521,9 @@ int main ( int argc, char **argv ) {
 	/* Clear the entire screen to our selected color. */
 	SDL_RenderClear(renderer);
 
+	vscale = g.window_height / 22; // get pixels per V
+	ascale = g.window_height / 5.5; // get pixels per A
+
 	char spinner[]="|/|\\";
 	uint8_t count = 0;
 
@@ -523,6 +535,7 @@ int main ( int argc, char **argv ) {
 	 */
 	int end_of_frame_received = 0;
 	int valid_data = 0;
+	buffer_start = buffer_end = 0;
 
 	while (!quit) {
 		char line1[1024];
@@ -631,6 +644,11 @@ int main ( int argc, char **argv ) {
 		else {
 			snprintf(line1, sizeof(line1), " %6.3fV", voltage);
 			snprintf(line2, sizeof(line2), " %6.3fA", current);
+			vdata[buffer_end] = voltage;
+			adata[buffer_end] = current;
+			buffer_end++;
+			if (buffer_end >= DATA_BUFFER_SIZE) buffer_end = 0;
+
 		}
 
 		fprintf(stderr,"%c\r", spinner[count %( sizeof(spinner)-1)]);
@@ -641,12 +659,19 @@ int main ( int argc, char **argv ) {
 		 *
 		 */
 
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+			SDL_RenderClear(renderer);
+
+
 		{
+			/*
+			 * Draw text
+			 *
+			 */
 			int texW = 0;
 			int texH = 0;
 			int texW2 = 0;
 			int texH2 = 0;
-			SDL_RenderClear(renderer);
 			surface = TTF_RenderUTF8_Blended(font, line1, g.font_color_volts);
 			texture = SDL_CreateTextureFromSurface(renderer, surface);
 			SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
@@ -658,6 +683,40 @@ int main ( int argc, char **argv ) {
 			SDL_QueryTexture(texture_2, NULL, NULL, &texW2, &texH2);
 			dstrect = { 0, texH -(texH /5), texW2, texH2 };
 			SDL_RenderCopy(renderer, texture_2, NULL, &dstrect);
+
+
+					{
+			/*
+			 * Draw data graphs
+			 *
+			 */
+
+			int y;
+			vscale = 1.0 *g.window_height / 22;
+			ascale = 1.0 *g.window_height / 5.5;
+
+			int32_t bx = buffer_end -g.window_width;
+			if (bx < 0) bx += DATA_BUFFER_SIZE;
+			fprintf(stderr," %d %d -> %d; height = %d vscale = %f, ascale = %f\n", buffer_end, bx, bx +g.window_width, g.window_height, vscale, ascale);
+			for (int x = 0; x < g.window_width; x++) {
+
+
+				SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+				y = 1.0 *vdata[bx] *vscale;
+				y = g.window_height -y;
+				SDL_RenderDrawPoint(renderer, x, y);
+//				fprintf(stderr,"%f => %d %d\n", vdata[(x+buffer_end)%DATA_BUFFER_SIZE] , x, y);
+
+				SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+				y = 1.0 *adata[bx] *ascale;
+				y = g.window_height -y;
+				SDL_RenderDrawPoint(renderer, x, y);
+				
+				bx++;
+				if (bx >= DATA_BUFFER_SIZE) bx = 0;
+			}
+//			fprintf(stderr,"start = %d, bx = %d,height = %d vscale = %f, ascale = %f\n", g.window_height, vscale, ascale);
+		}
 
 			SDL_RenderPresent(renderer);
 
