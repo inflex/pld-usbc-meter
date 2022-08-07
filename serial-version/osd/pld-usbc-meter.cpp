@@ -492,7 +492,7 @@ int main ( int argc, char **argv ) {
 
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	TTF_Font *font = TTF_OpenFont("RobotoMono-Regular.ttf", g.font_size);
+	TTF_Font *font = TTF_OpenFont("RobotoMono-Bold.ttf", g.font_size);
 	TTF_Font *font_small = TTF_OpenFont("RobotoMono-Regular.ttf", g.font_size/4);
 
 	/*
@@ -692,25 +692,49 @@ int main ( int argc, char **argv ) {
 			 */
 
 			int y;
-			vscale = 1.0 *g.window_height / 22;
-			ascale = 1.0 *g.window_height / 5.5;
+			double vpeak = 0;
+			double apeak = 0;
+			double pvy, pay;
+			int32_t b = buffer_end -g.window_width;
+			if (b < 0) b += DATA_BUFFER_SIZE;
+			for (int x = 0; x < g.window_width; x++) {
+				if (vdata[b] > vpeak) vpeak = vdata[b];
+				if (adata[b] > apeak) apeak = adata[b];
+				b++;
+				if (b >= DATA_BUFFER_SIZE) b = 0;
+			}
+
+			if (vpeak > 6 ) vscale = 1.0 *g.window_height / 22; // 22V peak
+			else vscale = 1.0 *g.window_height /6; // 6V peak
+
+			if (apeak > 1.1) ascale = 1.0 *g.window_height / 6; // 6A peak
+			else ascale = 1.0 *g.window_height /1.1; // 1.1A peak
 
 			int32_t bx = buffer_end -g.window_width;
 			if (bx < 0) bx += DATA_BUFFER_SIZE;
 			fprintf(stderr," %d %d -> %d; height = %d vscale = %f, ascale = %f\n", buffer_end, bx, bx +g.window_width, g.window_height, vscale, ascale);
+
 			for (int x = 0; x < g.window_width; x++) {
 
 
-				SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+
 				y = 1.0 *vdata[bx] *vscale;
 				y = g.window_height -y;
-				SDL_RenderDrawPoint(renderer, x, y);
-//				fprintf(stderr,"%f => %d %d\n", vdata[(x+buffer_end)%DATA_BUFFER_SIZE] , x, y);
+				if (x > 0) {
+					SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+//					SDL_RenderDrawPoint(renderer, x, y);
+					SDL_RenderDrawLine(renderer, x-1, pvy, x, y);
+				}
+				pvy = y;
 
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 				y = 1.0 *adata[bx] *ascale;
 				y = g.window_height -y;
-				SDL_RenderDrawPoint(renderer, x, y);
+				if (x > 0) {
+					SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+//oo					SDL_RenderDrawPoint(renderer, x, y);
+					SDL_RenderDrawLine(renderer, x-1, pay, x, y);
+				}
+				pay = y;
 				
 				bx++;
 				if (bx >= DATA_BUFFER_SIZE) bx = 0;
