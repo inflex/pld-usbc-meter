@@ -76,7 +76,7 @@ struct glb {
 		  char *com_address;
 		  struct serial_params_s serial_params;
 
-
+		  double current_threshold = 0.0;
 };
 
 /*
@@ -234,10 +234,13 @@ int parse_parameters(struct glb *g, int argc, char **argv ) {
 													 break;
 
 										  case '-':
-													 //					if (strncmp(argv[i], "--timeout", 9)==0) {
-													 //						i++;
-													 //						g->serial_timeout = strtol(argv[i], NULL, 10);
-													 //					}
+													 if (strncmp(argv[i], "--current-threshold", strlen("--current-threshold"))==0) {
+																int tmp;
+																i++;
+																tmp = strtol(argv[i], NULL, 10);
+																g->current_threshold = 0.001 * tmp;
+//																fprintf(stderr,"Current threshold set to %dmA ~ %0.3fA\n", tmp, g->current_threshold);
+													 }
 													 break;
 
 										  case 'h':
@@ -473,7 +476,7 @@ int main ( int argc, char **argv ) {
 			*/
 		  parse_parameters(&g, argc, argv);
 
-		  fprintf(stdout,"START\n");
+		  if (g.debug) fprintf(stdout,"START\n");
 
 		  /* 
 			* check paramters
@@ -527,7 +530,7 @@ int main ( int argc, char **argv ) {
 					 fprintf(stderr,"Ooops, cannot allocate %ld bytes for current buffer\n", g.window_width *sizeof(double));
 					 exit(1);
 		  }
-		  fprintf(stderr,"%ld bytes allocated in %d entries for v and a data\n", sizeof(double)*data_buffer_size, data_buffer_size);
+		  if (g.debug) fprintf(stderr,"%ld bytes allocated in %d entries for v and a data\n", sizeof(double)*data_buffer_size, data_buffer_size);
 		  for (int x = 0; x < data_buffer_size; x++) {
 					 adata[x] = 0.0;
 					 vdata[x] = 0.0;
@@ -565,6 +568,7 @@ int main ( int argc, char **argv ) {
 
 		  double v_min, v_max;
 		  double a_min, a_max;
+
 
 
 
@@ -631,7 +635,7 @@ int main ( int argc, char **argv ) {
 								if (bytes_read > 0) {
 										  if (temp_char == '\n') {
 													 end_of_frame_received = 1;
-													 fprintf(stderr, " *EOF* " );
+													 if (g.debug) fprintf(stderr, " *EOF* " );
 													 d[i] = 0;
 													 break;
 										  }
@@ -669,7 +673,8 @@ int main ( int argc, char **argv ) {
 					 current = shunt_voltage /0.05 /100000;  // 50mR shunt
 					 voltage = bus_voltage *VOLTAGE_QUANTA;
 
-					 if ((valid_data == 0) || (voltage < 0.2)) {
+
+					 if ((valid_data == 0) || (voltage < 0.2) || (current < g.current_threshold )) {
 								snprintf(line1, sizeof(line1), " -");
 								snprintf(line2, sizeof(line2), " -");
 					 }
@@ -685,7 +690,7 @@ int main ( int argc, char **argv ) {
 
 					 }
 
-					 fprintf(stderr,"%c\r", spinner[count %( sizeof(spinner)-1)]);
+					 if (g.debug) fprintf(stderr,"%c\r", spinner[count %( sizeof(spinner)-1)]);
 
 					 /*
 					  *
@@ -731,7 +736,7 @@ int main ( int argc, char **argv ) {
 										  a_min = 10;
 										  a_max = 0;
 
-//										  fprintf(stderr,"checking limits...");
+										  //										  fprintf(stderr,"checking limits...");
 										  int32_t b = buffer_end -g.window_width;
 										  if (b < 0) b += data_buffer_size;
 										  for (int x = 0; x < g.window_width; x++) {
@@ -742,7 +747,7 @@ int main ( int argc, char **argv ) {
 													 if ( adata[b] > a_max ) a_max = adata[b];
 													 b++;
 													 if (b >= data_buffer_size) b = 0;
-										//			 fprintf(stderr,".");
+													 //			 fprintf(stderr,".");
 										  }
 										  //fprintf(stderr,"done\n");
 
@@ -803,7 +808,7 @@ int main ( int argc, char **argv ) {
 
 										  int32_t bx = buffer_end -g.window_width;
 										  if (bx < 0) bx += data_buffer_size;
-										  fprintf(stderr," %d %d -> %d; height = %d vscale = %f, ascale = %f\n", buffer_end, bx, bx +g.window_width, g.window_height, vscale, ascale);
+//										  fprintf(stderr," %d %d -> %d; height = %d vscale = %f, ascale = %f\n", buffer_end, bx, bx +g.window_width, g.window_height, vscale, ascale);
 
 										  for (int x = 0; x < g.window_width; x++) {
 													 y = 1.0 *vdata[bx] *vscale;
@@ -850,7 +855,7 @@ int main ( int argc, char **argv ) {
 
 					 count++; // will loop, and that's okay
 								 //
-								
+
 		  } // while(1)
 
 		  TTF_CloseFont(font);
