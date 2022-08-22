@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/file.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -361,6 +362,12 @@ void open_port(struct serial_params_s *s) {
 					 perror( s->device );
 		  }
 
+		  r = flock(s->fd, LOCK_EX | LOCK_NB);
+		  if (r == -1) {
+					 fprintf(stderr, "%s:%d: Unable to set lock on %s, Error '%s'\n", FL, s->device, strerror(errno) );
+					 exit (1);
+		  }
+		  if (r == 0) {
 		  fcntl(s->fd,F_SETFL,0);
 		  tcgetattr(s->fd,&(s->oldtp)); // save current serial port settings 
 		  tcgetattr(s->fd,&(s->newtp)); // save current serial port settings in to what will be our new settings
@@ -371,6 +378,7 @@ void open_port(struct serial_params_s *s) {
 		  if (r) {
 					 fprintf(stderr,"%s:%d: Error setting terminal (%s)\n", FL, strerror(errno));
 					 exit(1);
+		  }
 		  }
 }
 
@@ -857,6 +865,9 @@ int main ( int argc, char **argv ) {
 								 //
 
 		  } // while(1)
+
+		  close(g.serial_params.fd);
+		  flock(g.serial_params.fd, LOCK_UN);
 
 		  TTF_CloseFont(font);
 		  SDL_DestroyRenderer(renderer);
