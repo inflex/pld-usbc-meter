@@ -240,7 +240,7 @@ int parse_parameters(struct glb *g, int argc, char **argv ) {
 																i++;
 																tmp = strtol(argv[i], NULL, 10);
 																g->current_threshold = 0.001 * tmp;
-//																fprintf(stderr,"Current threshold set to %dmA ~ %0.3fA\n", tmp, g->current_threshold);
+																//																fprintf(stderr,"Current threshold set to %dmA ~ %0.3fA\n", tmp, g->current_threshold);
 													 }
 													 break;
 
@@ -368,17 +368,17 @@ void open_port(struct serial_params_s *s) {
 					 exit (1);
 		  }
 		  if (r == 0) {
-		  fcntl(s->fd,F_SETFL,0);
-		  tcgetattr(s->fd,&(s->oldtp)); // save current serial port settings 
-		  tcgetattr(s->fd,&(s->newtp)); // save current serial port settings in to what will be our new settings
-		  cfmakeraw(&(s->newtp));
-		  s->newtp.c_cflag = B9600 | CS8 |  CREAD | CRTSCTS ; // Adjust the settings to suit our BSIDE-ADM20 / 2400-8n1
+					 fcntl(s->fd,F_SETFL,0);
+					 tcgetattr(s->fd,&(s->oldtp)); // save current serial port settings 
+					 tcgetattr(s->fd,&(s->newtp)); // save current serial port settings in to what will be our new settings
+					 cfmakeraw(&(s->newtp));
+					 s->newtp.c_cflag = B9600 | CS8 |  CREAD | CRTSCTS ; // Adjust the settings to suit our BSIDE-ADM20 / 2400-8n1
 
-		  r = tcsetattr(s->fd, TCSANOW, &(s->newtp));
-		  if (r) {
-					 fprintf(stderr,"%s:%d: Error setting terminal (%s)\n", FL, strerror(errno));
-					 exit(1);
-		  }
+					 r = tcsetattr(s->fd, TCSANOW, &(s->newtp));
+					 if (r) {
+								fprintf(stderr,"%s:%d: Error setting terminal (%s)\n", FL, strerror(errno));
+								exit(1);
+					 }
 		  }
 }
 
@@ -724,12 +724,16 @@ int main ( int argc, char **argv ) {
 								SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 								SDL_Rect dstrect = { 0, 0, texW, texH };
 								SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+								SDL_DestroyTexture(texture);
+								SDL_FreeSurface(surface);
 
 								surface_2 = TTF_RenderUTF8_Blended(font, line2, g.font_color_amps);
 								texture_2 = SDL_CreateTextureFromSurface(renderer, surface_2);
 								SDL_QueryTexture(texture_2, NULL, NULL, &texW2, &texH2);
 								dstrect = { 0, texH -(texH /5), texW2, texH2 };
 								SDL_RenderCopy(renderer, texture_2, NULL, &dstrect);
+								SDL_DestroyTexture(texture_2);
+								SDL_FreeSurface(surface_2);
 
 
 								/*
@@ -765,6 +769,8 @@ int main ( int argc, char **argv ) {
 										  SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 										  dstrect = { g.window_width -texW, 0, texW, texH };
 										  SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+										  SDL_DestroyTexture(texture);
+										  SDL_FreeSurface(surface);
 
 										  snprintf(sss, sizeof(sss), "%0.3f", v_min);
 										  surface = TTF_RenderUTF8_Blended(font_half, sss, g.font_color_volts);
@@ -772,6 +778,8 @@ int main ( int argc, char **argv ) {
 										  SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 										  dstrect = { g.window_width -texW, g.window_height /4, texW, texH };
 										  SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+										  SDL_DestroyTexture(texture);
+										  SDL_FreeSurface(surface);
 
 										  snprintf(sss, sizeof(sss), "%0.3f", a_max);
 										  surface = TTF_RenderUTF8_Blended(font_half, sss, g.font_color_amps);
@@ -779,6 +787,8 @@ int main ( int argc, char **argv ) {
 										  SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 										  dstrect = { g.window_width -texW, g.window_height /2, texW, texH };
 										  SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+										  SDL_DestroyTexture(texture);
+										  SDL_FreeSurface(surface);
 
 										  snprintf(sss, sizeof(sss), "%0.3f", a_min);
 										  surface = TTF_RenderUTF8_Blended(font_half, sss, g.font_color_amps);
@@ -786,6 +796,8 @@ int main ( int argc, char **argv ) {
 										  SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 										  dstrect = { g.window_width -texW, (g.window_height /4) *3, texW, texH };
 										  SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+										  SDL_DestroyTexture(texture);
+										  SDL_FreeSurface(surface);
 								}
 
 
@@ -816,7 +828,7 @@ int main ( int argc, char **argv ) {
 
 										  int32_t bx = buffer_end -g.window_width;
 										  if (bx < 0) bx += data_buffer_size;
-//										  fprintf(stderr," %d %d -> %d; height = %d vscale = %f, ascale = %f\n", buffer_end, bx, bx +g.window_width, g.window_height, vscale, ascale);
+										  //										  fprintf(stderr," %d %d -> %d; height = %d vscale = %f, ascale = %f\n", buffer_end, bx, bx +g.window_width, g.window_height, vscale, ascale);
 
 										  for (int x = 0; x < g.window_width; x++) {
 													 y = 1.0 *vdata[bx] *vscale;
@@ -845,12 +857,14 @@ int main ( int argc, char **argv ) {
 
 								SDL_RenderPresent(renderer);
 
+								/*
 								SDL_DestroyTexture(texture);
 								SDL_FreeSurface(surface);
 								if (1) {
 										  SDL_DestroyTexture(texture_2);
 										  SDL_FreeSurface(surface_2);
 								}
+								*/
 
 								if (g.error_flag) {
 										  sleep(1);
@@ -870,6 +884,9 @@ int main ( int argc, char **argv ) {
 		  flock(g.serial_params.fd, LOCK_UN);
 
 		  TTF_CloseFont(font);
+		  TTF_CloseFont(font_half);
+		  TTF_CloseFont(font_small);
+		  
 		  SDL_DestroyRenderer(renderer);
 		  SDL_DestroyWindow(window);
 		  TTF_Quit();
