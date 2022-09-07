@@ -734,6 +734,9 @@ int main ( int argc, char **argv ) {
 		  current = shunt_voltage /0.05 /100000;  // 50mR shunt
 		  voltage = bus_voltage *VOLTAGE_QUANTA;
 
+		  if (current < 0) current = -current;
+
+		  if (g.debug) fprintf(stderr,"valid = %d A = %f, V = %f\n", valid_data, current, voltage);
 
 		  if ((valid_data == 0) || (voltage < 0.2) || (current < g.current_threshold )) {
 				snprintf(line1, sizeof(line1), " -");
