@@ -62,7 +62,7 @@ void serial_send_string( const char *s ) {
 #define I2C_WRITE 0
 
 uint8_t read_SDA (void) {
-	 return (PORTA.IN & (1<<PIN2_bp));
+	return (PORTA.IN & (1<<PIN2_bp));
 }
 void sda_high(void) {
 	PORTA.DIRCLR = (1<<PIN2_bp);
@@ -84,123 +84,123 @@ void scl_low(void) {
 }
 
 
-#define Q_DEL _delay_loop_2(3)
-#define H_DEL _delay_loop_2(5)
+#define Q_DELAY _delay_loop_2(3)
+#define H_DELAY _delay_loop_2(5)
 
-void i2cInit()
+void i2c_init()
 {
 	sda_high();	
 	scl_high();	
 
 	PORTA.OUT &= ~(1<<PIN2_bp);
 	PORTA.OUT &= ~(1<<PIN3_bp);
-	
-		
+
+
 }
-uint8_t i2cWriteByte(uint8_t data)
+uint8_t i2c_write_byte(uint8_t data)
 {
-	 
-	 uint8_t i;
-	 	
-	 for(i=0;i<8;i++) {
+
+	uint8_t i;
+
+	for(i=0;i<8;i++) {
 		scl_low();
-		
+
 		if(data & 0x80) {
 			sda_high();
 		}else {
 			sda_low();	
 		}
-		H_DEL;
+		H_DELAY;
 		scl_high();
-		H_DEL;
+		H_DELAY;
 		data=data<<1;
 	}
-	 
-	//The 9th clock (ACK Phase)
+
+	// Data has been sent, now listen for the ACK
+	//
 	scl_low();
-	H_DEL;
-		
+	H_DELAY;
+
 	scl_high();		
 	while (read_SCL()==0);
 
-	 uint8_t ack;
-	 ack = read_SDA();
+	uint8_t ack;
+	ack = read_SDA();
 
-	 H_DEL;
-	
+	H_DELAY;
+
 	return ack;
-	 
+
 }
- 
+
 
 
 
 void i2cStop()
 {
 
-	 scl_low();
-	 sda_low();
-	 H_DEL;
-	 scl_high();
-	 Q_DEL;
-	 sda_high();
-	 H_DEL;
+	scl_low();
+	sda_low();
+	H_DELAY;
+	scl_high();
+	Q_DELAY;
+	sda_high();
+	H_DELAY;
 }
 
- 
-uint8_t i2cReadByte(uint8_t ack)
+
+uint8_t i2c_read_byte(uint8_t ack)
 {
 	uint8_t data=0x00;
 	uint8_t i;
-			
+
 	for(i=0;i<8;i++)
 	{
-			
+
 		scl_low();
-		sda_high(); //????
-		H_DEL;
+		sda_high(); // Without this, the uC sent ACK doesn't seem to work
+		H_DELAY;
 		scl_high();
-		H_DEL;
-			
-//		while(read_SCL()==0);
-		
+		H_DELAY;
+
+		//		while(read_SCL()==0);
+
 		if (read_SDA()) data |= 1;
 		if (i < 7) data <<= 1;
-//		if(read_SDA()) data|=(0x80>>i);
-			
+
 	}
-		
+
 	scl_low();
 	if (ack == 1) sda_low();
 	else sda_high();
-	H_DEL;
+	H_DELAY;
 	scl_high();
-	
+
 	while ( read_SCL() == 0 ); // wait for slave to finish if it's stretching
 
-	H_DEL;
-			
+	H_DELAY;
+
 	return data;
-	
+
 }
 
 
-uint8_t i2cStart( uint8_t addr ) {
+uint8_t i2c_start( uint8_t addr ) {
 	sda_low();
-	Q_DEL;
-	return i2cWriteByte(addr);
+	Q_DELAY;
+	return i2c_write_byte(addr);
 }
 
-uint8_t i2cStartRep( uint8_t addr ) {
+uint8_t i2c_start_rep( uint8_t addr ) {
 	scl_low();
 	sda_high();
-	H_DEL;
+	H_DELAY;
 	scl_high();
-	Q_DEL;
+	Q_DELAY;
 	sda_low();
-	Q_DEL;
+	Q_DELAY;
 
-	return i2cWriteByte(addr);
+	return i2c_write_byte(addr);
 }
 
 
@@ -229,7 +229,7 @@ int main( void ) {
 
 	// Initialise the I2C SCL / SDA pair
 	//
-	i2cInit();
+	i2c_init();
 
 	while (1) {
 		uint8_t a;
@@ -240,29 +240,29 @@ int main( void ) {
 		 * settings register, which should be 0x399F
 		 *
 		 *
-		i2cStart(INA219|I2C_WRITE);
-		a = i2cWriteByte(0x00);
-		i2cStartRep( INA219|I2C_READ );
-		shunt_high = i2cReadByte(1);
-		shunt_low = i2cReadByte(0);
+		 i2c_start(INA219|I2C_WRITE);
+		 a = i2c_write_byte(0x00);
+		 i2c_start_rep( INA219|I2C_READ );
+		 shunt_high = i2c_read_byte(1);
+		 shunt_low = i2c_read_byte(0);
+		 i2cStop();
+
+		 snprintf(outs,sizeof(outs),"ack = %d id: %02x %02x ", a, shunt_high, shunt_low );
+		 serial_send_string( outs );
+		 */
+
+		i2c_start(INA219|I2C_WRITE);
+		i2c_write_byte(0x01);
+		i2c_start_rep( INA219|I2C_READ );
+		shunt_high = i2c_read_byte(1);
+		shunt_low = i2c_read_byte(0);
 		i2cStop();
 
-		snprintf(outs,sizeof(outs),"ack = %d id: %02x %02x ", a, shunt_high, shunt_low );
-		serial_send_string( outs );
-		*/
-
-		i2cStart(INA219|I2C_WRITE);
-		i2cWriteByte(0x01);
-		i2cStartRep( INA219|I2C_READ );
-		shunt_high = i2cReadByte(1);
-		shunt_low = i2cReadByte(0);
-		i2cStop();
-
-		i2cStart(INA219|I2C_WRITE);
-		i2cWriteByte(0x02);
-		i2cStartRep( INA219|I2C_READ );
-		bus_high = i2cReadByte(1);
-		bus_low = i2cReadByte(0);
+		i2c_start(INA219|I2C_WRITE);
+		i2c_write_byte(0x02);
+		i2c_start_rep( INA219|I2C_READ );
+		bus_high = i2c_read_byte(1);
+		bus_low = i2c_read_byte(0);
 		i2cStop();
 
 		snprintf(outs,sizeof(outs),"%02x%02x%02x%02x\n", shunt_high, shunt_low, bus_high, bus_low );
