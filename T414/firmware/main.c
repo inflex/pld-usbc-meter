@@ -122,6 +122,7 @@ uint8_t i2c_write_byte(uint8_t data)
 	H_DELAY;
 
 	scl_high();		
+	//	H_DELAY; // optional
 	while (read_SCL()==0);
 
 	uint8_t ack;
@@ -136,9 +137,8 @@ uint8_t i2c_write_byte(uint8_t data)
 
 
 
-void i2cStop()
+void i2c_stop()
 {
-
 	scl_low();
 	sda_low();
 	H_DELAY;
@@ -204,14 +204,77 @@ uint8_t i2c_start_rep( uint8_t addr ) {
 }
 
 
+uint8_t i2c_start_wait( uint8_t addr ) {
+	while ( 1 ) {
+		sda_low();
+		H_DELAY;
+		if (i2c_write_byte(addr) == 0) break;
+		i2c_stop();
+	}
+	return 0;
+}
 
 
 
 
+void lcd_cmd80(uint8_t db)
+{
+	i2c_write_byte(0x80);
+	_delay_ms(1);
+	i2c_write_byte(db);
+}
+
+void lcd_cmd0(uint8_t db)
+{
+	i2c_write_byte(0x00);
+	i2c_write_byte(db);
+}
+
+void lcd_cmd(uint8_t db)
+{
+	i2c_start_wait(LCD +I2C_WRITE);
+	_delay_ms(1);
+	i2c_write_byte(0x80);
+	_delay_ms(1);
+	i2c_write_byte(db);
+	i2c_stop();
+	_delay_ms(1);
+}
+
+void lcd_data(uint8_t db)
+{
+	i2c_start_wait(LCD+I2C_WRITE);
+	i2c_write_byte(0x40);
+	i2c_write_byte(db);
+	i2c_stop();
+	_delay_ms(1);
+}
+
+void lcd_puts(uint8_t *s)
+{
+	while(*s){
+		lcd_data(*s++);
+	}
+}
 
 
 
+void lcd_init(void) {	
 
+#define LCD_CONTRAST 0b110000 
+	i2c_start(LCD+I2C_WRITE);
+	lcd_cmd80(0x38);
+	lcd_cmd80(0x39);
+	lcd_cmd80(0x1c);
+	lcd_cmd80(0x76); // lower 4 bits of contrast, ranges between 76~7a seem ok
+	lcd_cmd80(0x56); // upper contrast, don't meddle with this one
+	lcd_cmd80(0x6c);
+	lcd_cmd80(0x0c);
+	lcd_cmd80(0x01);
+	//	lcd_cmd80(0x06);
+	//	lcd_cmd80(0x02);
+	i2c_stop();
+}
 
 
 
@@ -221,6 +284,10 @@ int main( void ) {
 
 	uint8_t shunt_high, shunt_low;
 	uint8_t bus_high, bus_low;
+	uint8_t lcd_loop_count = 0;
+
+
+
 
 	// Serial port output
 	//
@@ -230,6 +297,25 @@ int main( void ) {
 	// Initialise the I2C SCL / SDA pair
 	//
 	i2c_init();
+
+
+
+	_delay_ms(100); // we have to wait for the LCD to get ready, usually 40ms.
+						 //
+	lcd_init();
+	_delay_ms(40);
+	lcd_init();
+	_delay_ms(40);
+
+	lcd_puts((uint8_t *)"PLD-USBC");
+	lcd_cmd(0xC0);	// ADDR=0x40
+	lcd_puts((uint8_t *)"Meter");
+	_delay_ms(2000);			 
+
+	lcd_cmd(0x01); // Clear screen
+
+
+	serial_send_string("\r\nPLD-UCM4-T414\r\n");
 
 	while (1) {
 		uint8_t a;
@@ -245,7 +331,7 @@ int main( void ) {
 		 i2c_start_rep( INA219|I2C_READ );
 		 shunt_high = i2c_read_byte(1);
 		 shunt_low = i2c_read_byte(0);
-		 i2cStop();
+		 i2c_stop();
 
 		 snprintf(outs,sizeof(outs),"ack = %d id: %02x %02x ", a, shunt_high, shunt_low );
 		 serial_send_string( outs );
@@ -256,105 +342,78 @@ int main( void ) {
 		i2c_start_rep( INA219|I2C_READ );
 		shunt_high = i2c_read_byte(1);
 		shunt_low = i2c_read_byte(0);
-		i2cStop();
+		i2c_stop();
 
 		i2c_start(INA219|I2C_WRITE);
 		i2c_write_byte(0x02);
 		i2c_start_rep( INA219|I2C_READ );
 		bus_high = i2c_read_byte(1);
 		bus_low = i2c_read_byte(0);
-		i2cStop();
+		i2c_stop();
 
 		snprintf(outs,sizeof(outs),"%02x%02x%02x%02x\n", shunt_high, shunt_low, bus_high, bus_low );
 		serial_send_string( outs );
 
-	}
-
-	/*
-
-		uint8_t lcd_loop_count = 0;
-
-		while (1) {
-
-		uint8_t shunt_high, shunt_low;
-		uint8_t bus_high, bus_low;
-
-
-
-
-		i2c_start_wait(INA219+I2C_WRITE);
-		i2c_write(0x01);
-		i2c_rep_start(INA219+I2C_READ);
-		shunt_high = i2c_readAck();
-		shunt_low = i2c_readNak();
-		i2c_stop();
-
-		i2c_start_wait(INA219+I2C_WRITE);
-		i2c_write(0x02);
-		i2c_rep_start(INA219+I2C_READ);
-		bus_high = i2c_readAck();
-		bus_low = i2c_readNak();
-		i2c_stop();
-
-		snprintf(outs,sizeof(outs),"%02x%02x", shunt_high, shunt_low );
-		serial_send_string( outs );
-		snprintf(outs,sizeof(outs),"%02x%02x", bus_high, bus_low);
-		serial_send_string( outs );
-		serial_send_string( "\n" );
 
 		if (lcd_loop_count == 0) {
-		lcd_loop_count = 5;
+			lcd_loop_count = 5;
 
 
-		uint16_t voltage;
-		uint16_t current_reg;
-		uint32_t current;
-		uint32_t v, dv;
+			uint16_t voltage;
+			int16_t current_reg;
+			int32_t current;
+			uint32_t v, dv;
 
-		voltage	= (bus_high << 8);
-		voltage += bus_low;
-		voltage = voltage >> 3;//	+ bus_low) >> 3;// *VOLTAGE_QUANTA; // 4mV per unit
-									  //
-									  //uint32_t current = (((shunt_high & 0x8F) << 8) + shunt_low) *20; // 0.05R shunt
+			voltage	= (bus_high << 8);
+			voltage += bus_low;
+			voltage = voltage >> 3;//	+ bus_low) >> 3;// *VOLTAGE_QUANTA; // 4mV per unit
+										  //
+										  //uint32_t current = (((shunt_high & 0x8F) << 8) + shunt_low) *20; // 0.05R shunt
 
 
-									  v = voltage *4;
-									  voltage = v;
-									  v = voltage /1000;
-									  dv = voltage -(v *1000);
-									  snprintf(outs,8,"%2lu.%03luV ", v, dv);
+			v = voltage *4;
+			voltage = v;
+			v = voltage /1000;
+			dv = voltage -(v *1000);
+			snprintf(outs,9,"%2lu.%03luV ", v, dv);
 
-									  if (((v == 0) && (dv < 200)) || ((bus_low & 0x01)==1)) {
-									  snprintf(outs,8,"-       ");
-									  lcd_cmd(0b00000010); // Go home
-									  lcd_puts((uint8_t *)outs);
-									  lcd_cmd(0b11000000);	// ADDR=0x40
-									  lcd_puts((uint8_t *)outs);
+			if (((v == 0) && (dv < 200)) || ((bus_low & 0x01)==1)) {
+				snprintf(outs,9,"-       ");
+				lcd_cmd(0b00000010); // Go home
+				lcd_puts((uint8_t *)outs);
+				lcd_cmd(0b11000000);	// ADDR=0x40
+				lcd_puts((uint8_t *)outs);
 
-									  } else {
+			} else {
 
-									  lcd_cmd(0b00000010); // Go home
-									  _delay_ms(3);
-									  outs[8] = 0;
-									  lcd_puts((uint8_t *)outs);
+				lcd_cmd(0b00000010); // Go home
+				_delay_ms(3);
+				outs[8] = 0;
+				lcd_puts((uint8_t *)outs);
 
-									  lcd_cmd(0b11000000);	// ADDR=0x40
-									  current_reg = (shunt_high << 8) + shunt_low; // compose the register
-									  current = current_reg ; // 0.05R shunt, so I = V/R, I = shunt voltage / 0.05 => I = shunt_voltage *20;
-	current = current *20;
-	current = current /100;
-	v = current /1000;
-	dv = current -(v *1000);
-	snprintf(outs,8,"%2lu.%03luA ", v, dv);
+				uint32_t abs_current;
 
-	outs[8] = 0;
-	lcd_puts((uint8_t *)outs);
-}
-}
-lcd_loop_count--;
+				lcd_cmd(0b11000000);	// ADDR=0x40
+				current_reg = (shunt_high << 8) + shunt_low; // compose the register
+				current = current_reg ; // 0.05R shunt, so I = V/R, I = shunt voltage / 0.05 => I = shunt_voltage *20;
+				current = current *20;
+				current = current /100;
+				if (current < 0) abs_current = -current;
+				else abs_current = current;
+				v = abs_current /1000;
+				dv = abs_current -(v *1000);
+				if (current < 0) snprintf(outs,9,">%1lu.%03luA>", v, dv);
+				else snprintf(outs,9,"<%1lu.%03luA<", v, dv);
 
-_delay_ms(50);
-}
-*/
-return 0;
+				outs[8] = 0;
+				lcd_puts((uint8_t *)outs);
+			}
+
+		} // lcd_loop_count == 0;
+		  //
+		lcd_loop_count--;
+
+		_delay_ms(50);
+	} // while (1) big loop
+	return 0;
 }
