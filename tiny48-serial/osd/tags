@@ -1,0 +1,138 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/pld/development/pld/usb-c-meter-pld/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+.c.o	i2c/Makefile	/^.c.o:$/;"	t
+BD	Makefile	/^BD=today$/;"	m
+BUILD_DATE	pld-usbc-meter.cpp	/^#define BUILD_DATE /;"	d	file:
+BUILD_VER	pld-usbc-meter.cpp	/^#define BUILD_VER /;"	d	file:
+BV	Makefile	/^BV=1234$/;"	m
+CC	Makefile	/^CC=gcc$/;"	m
+CC	i2c/Makefile	/^CC=gcc$/;"	m
+CCDBG	i2c/compass-switch.c	/^#define CCDBG /;"	d	file:
+CCDBG	pld-usbc-meter.cpp	/^#define CCDBG /;"	d	file:
+CFLAGS	Makefile	/^CFLAGS=  -O2 -DBUILD_VER="$(BV)" -DBUILD_DATE=\\""$(BD)"\\" -DFAKE_SERIAL=$(FAKE_SERIAL)$/;"	m
+CFLAGS	i2c/Makefile	/^CFLAGS=-Wall -O1$/;"	m
+FL	pld-usbc-meter.cpp	/^#define FL /;"	d	file:
+GCC	Makefile	/^GCC=g++$/;"	m
+HMC5833L_FRAME_SLEEP	i2c/compass-switch.c	/^#define HMC5833L_FRAME_SLEEP /;"	d	file:
+HMC5883L_ID	i2c/compass-switch.c	/^#define HMC5883L_ID /;"	d	file:
+I2C_DBG	i2c.c	/^#define I2C_DBG /;"	d	file:
+I2C_DBG	i2c/i2c.c	/^#define I2C_DBG /;"	d	file:
+INA219_FRAME_SLEEP	pld-usbc-meter.cpp	/^#define INA219_FRAME_SLEEP /;"	d	file:
+INA219_ID	pld-usbc-meter.cpp	/^#define INA219_ID /;"	d	file:
+INTERFRAME_SLEEP	pld-usbc-meter.cpp	/^#define INTERFRAME_SLEEP	/;"	d	file:
+LIBS	Makefile	/^LIBS=-lSDL2_ttf$/;"	m
+LIBS	i2c/Makefile	/^LIBS=-lm$/;"	m
+MAX_KEYS	i2c/compass-switch.c	/^#define MAX_KEYS /;"	d	file:
+MP730424-OSD	README.md	/^# MP730424-OSD $/;"	c
+OBJS	i2c/Makefile	/^OBJS=keycode-decode.o i2c.o$/;"	m
+QUIET	i2c/compass-switch.c	/^#define QUIET /;"	d	file:
+Requirements	README.md	/^# Requirements$/;"	c
+SCENE_ACTIVE	i2c/compass-switch.c	/^#define SCENE_ACTIVE /;"	d	file:
+SCENE_INACTIVE	i2c/compass-switch.c	/^#define SCENE_INACTIVE /;"	d	file:
+SDLFLAGS	Makefile	/^SDLFLAGS=$(shell (sdl2-config --static-libs --cflags))$/;"	m
+SEPARATOR_DP	pld-usbc-meter.cpp	/^char SEPARATOR_DP[] = ".";$/;"	v	typeref:typename:char[]
+SSIZE	pld-usbc-meter.cpp	/^#define SSIZE /;"	d	file:
+Setup	README.md	/^# Setup$/;"	c
+TOKENISING_CHAR	i2c/compass-switch.c	/^#define TOKENISING_CHAR /;"	d	file:
+Usage	README.md	/^# Usage$/;"	c
+VERBOSE	i2c/compass-switch.c	/^#define VERBOSE /;"	d	file:
+a2h	pld-usbc-meter.cpp	/^uint8_t a2h( uint8_t a ) {$/;"	f	typeref:typename:uint8_t
+background_color	pld-usbc-meter.cpp	/^	SDL_Color font_color_volts, font_color_amps, background_color;$/;"	m	struct:glb	typeref:typename:SDL_Color	file:
+busid	pld-usbc-meter.cpp	/^	int busid;$/;"	m	struct:glb	typeref:typename:int	file:
+clean	Makefile	/^clean:$/;"	t
+clean	i2c/Makefile	/^clean:$/;"	t
+compass-switch	i2c/Makefile	/^compass-switch: compass-switch.c $(OBJS)$/;"	t
+compass-switch	i2c/README.md	/^# compass-switch$/;"	c
+debug	i2c.c	/^static int debug = 0;$/;"	v	typeref:typename:int	file:
+debug	i2c/compass-switch.c	/^	int debug; \/\/ debugging *duh*$/;"	m	struct:glb	typeref:typename:int	file:
+debug	i2c/i2c.c	/^static int debug = 0;$/;"	v	typeref:typename:int	file:
+debug	pld-usbc-meter.cpp	/^	uint8_t debug;$/;"	m	struct:glb	typeref:typename:uint8_t	file:
+default	Makefile	/^default: $(OBJ)$/;"	t
+default	i2c/Makefile	/^default: compass-switch$/;"	t
+device	pld-usbc-meter.cpp	/^	char *device;$/;"	m	struct:glb	typeref:typename:char *	file:
+digit	pld-usbc-meter.cpp	/^char digit( unsigned char dg ) {$/;"	f	typeref:typename:char
+end_angle	i2c/compass-switch.c	/^	int end_angle;$/;"	m	struct:glb	typeref:typename:int	file:
+error_flag	pld-usbc-meter.cpp	/^	uint16_t error_flag;$/;"	m	struct:glb	typeref:typename:uint16_t	file:
+exit_program	i2c/compass-switch.c	/^int exit_program = 0;$/;"	v	typeref:typename:int
+fileExists	pld-usbc-meter.cpp	/^bool fileExists(const char *filename) {$/;"	f	typeref:typename:bool
+flags	pld-usbc-meter.cpp	/^	uint16_t flags;$/;"	m	struct:glb	typeref:typename:uint16_t	file:
+font_color_amps	pld-usbc-meter.cpp	/^	SDL_Color font_color_volts, font_color_amps, background_color;$/;"	m	struct:glb	typeref:typename:SDL_Color	file:
+font_color_volts	pld-usbc-meter.cpp	/^	SDL_Color font_color_volts, font_color_amps, background_color;$/;"	m	struct:glb	typeref:typename:SDL_Color	file:
+font_size	pld-usbc-meter.cpp	/^	int font_size;$/;"	m	struct:glb	typeref:typename:int	file:
+gdebug	i2c/compass-switch.c	/^int gdebug = 0;$/;"	v	typeref:typename:int
+get_func	pld-usbc-meter.cpp	/^	char get_func[20];$/;"	m	struct:glb	typeref:typename:char[20]	file:
+gkeyboard	i2c/compass-switch.c	/^int gkeyboard = -1; \/\/ global uinput keyboard device handle, needed so we can clean up via ate/;"	v	typeref:typename:int
+glb	i2c/compass-switch.c	/^struct glb {$/;"	s	file:
+glb	pld-usbc-meter.cpp	/^struct glb {$/;"	s	file:
+glbs	pld-usbc-meter.cpp	/^struct glb *glbs;$/;"	v	typeref:struct:glb *
+hysteresis	i2c/compass-switch.c	/^	int hysteresis;$/;"	m	struct:glb	typeref:typename:int	file:
+i2c_close_bus	i2c.c	/^int i2c_close_bus( int busfd ) {$/;"	f	typeref:typename:int
+i2c_close_bus	i2c/i2c.c	/^int i2c_close_bus( int busfd ) {$/;"	f	typeref:typename:int
+i2c_open_bus	i2c.c	/^int i2c_open_bus( int bus ) {$/;"	f	typeref:typename:int
+i2c_open_bus	i2c/i2c.c	/^int i2c_open_bus( int bus ) {$/;"	f	typeref:typename:int
+i2c_read_bus	i2c.c	/^int i2c_read_bus(int busfd, unsigned char *buf, int bufsize) {$/;"	f	typeref:typename:int
+i2c_read_bus	i2c/i2c.c	/^int i2c_read_bus(int busfd, unsigned char *buf, int bufsize) {$/;"	f	typeref:typename:int
+i2c_read_register	i2c.c	/^int i2c_read_register(int busfd, uint8_t reg, unsigned char *buf, int bufsize) {$/;"	f	typeref:typename:int
+i2c_read_register	i2c/i2c.c	/^int i2c_read_register(int busfd, uint8_t reg, unsigned char *buf, int bufsize) {$/;"	f	typeref:typename:int
+i2c_set_debug	i2c.c	/^int i2c_set_debug( int level ) {$/;"	f	typeref:typename:int
+i2c_set_debug	i2c/i2c.c	/^int i2c_set_debug( int level ) {$/;"	f	typeref:typename:int
+i2c_set_device	i2c.c	/^int i2c_set_device(int busfd, int addr) {$/;"	f	typeref:typename:int
+i2c_set_device	i2c/i2c.c	/^int i2c_set_device(int busfd, int addr) {$/;"	f	typeref:typename:int
+i2c_set_verbose	i2c.c	/^int i2c_set_verbose( int level ) {$/;"	f	typeref:typename:int
+i2c_set_verbose	i2c/i2c.c	/^int i2c_set_verbose( int level ) {$/;"	f	typeref:typename:int
+i2c_twos2dec_16	i2c.c	/^int16_t i2c_twos2dec_16( unsigned char *raw ) {$/;"	f	typeref:typename:int16_t
+i2c_twos2dec_16	i2c/i2c.c	/^int16_t i2c_twos2dec_16( unsigned char *raw ) {$/;"	f	typeref:typename:int16_t
+i2c_write_bus	i2c.c	/^int i2c_write_bus(int busfd, unsigned char *buf, int bufsize) {$/;"	f	typeref:typename:int
+i2c_write_bus	i2c/i2c.c	/^int i2c_write_bus(int busfd, unsigned char *buf, int bufsize) {$/;"	f	typeref:typename:int
+i2c_write_register_byte	i2c.c	/^int i2c_write_register_byte( int busfd, uint8_t reg, uint8_t data ) {$/;"	f	typeref:typename:int
+i2c_write_register_byte	i2c/i2c.c	/^int i2c_write_register_byte( int busfd, uint8_t reg, uint8_t data ) {$/;"	f	typeref:typename:int
+init	pld-usbc-meter.cpp	/^int init(struct glb *g) {$/;"	f	typeref:typename:int
+int_handler	i2c/compass-switch.c	/^void int_handler(int dummy) {$/;"	f	typeref:typename:void
+interval	pld-usbc-meter.cpp	/^	int interval;$/;"	m	struct:glb	typeref:typename:int	file:
+is_hmc5883	i2c/compass-switch.c	/^int is_hmc5883( int file ) {$/;"	f	typeref:typename:int
+is_ina219	pld-usbc-meter.cpp	/^int is_ina219( int file ) {$/;"	f	typeref:typename:int
+is_match	i2c/keycode-decode.c	/^int is_match( char *a, char *b ) {$/;"	f	typeref:typename:int
+key	i2c/compass-switch.c	/^	int key; \/\/ key scan code$/;"	m	struct:glb	typeref:typename:int	file:
+keyboard	i2c/compass-switch.c	/^	int keyboard;  \/\/ file handle for keyboard$/;"	m	struct:glb	typeref:typename:int	file:
+keycode_decode	i2c/keycode-decode.c	/^int keycode_decode( char *input ) {$/;"	f	typeref:typename:int
+keys_active	i2c/compass-switch.c	/^	int keys_active[MAX_KEYS+1];$/;"	m	struct:glb	typeref:typename:int[]	file:
+keys_inactive	i2c/compass-switch.c	/^	int keys_inactive[MAX_KEYS+1];$/;"	m	struct:glb	typeref:typename:int[]	file:
+kmods	i2c/compass-switch.c	/^	int kmods; \/\/ 0:ctrl, 1:alt, 2:shift$/;"	m	struct:glb	typeref:typename:int	file:
+main	i2c/compass-switch.c	/^int main(int argc, char **argv) {$/;"	f	typeref:typename:int
+main	pld-usbc-meter.cpp	/^int main ( int argc, char **argv ) {$/;"	f	typeref:typename:int
+meas_value	pld-usbc-meter.cpp	/^	char meas_value[20];$/;"	m	struct:glb	typeref:typename:char[20]	file:
+output_file	pld-usbc-meter.cpp	/^	char *output_file;$/;"	m	struct:glb	typeref:typename:char *	file:
+parse_parameters	i2c/compass-switch.c	/^int parse_parameters( struct glb *g, int argc, char **argv ) {$/;"	f	typeref:typename:int
+parse_parameters	pld-usbc-meter.cpp	/^int parse_parameters(struct glb *g, int argc, char **argv ) {$/;"	f	typeref:typename:int
+pld-usbc-meter	Makefile	/^pld-usbc-meter: pld-usbc-meter.cpp$/;"	t
+quiet	i2c/compass-switch.c	/^	int quiet;$/;"	m	struct:glb	typeref:typename:int	file:
+quiet	pld-usbc-meter.cpp	/^	uint8_t quiet;$/;"	m	struct:glb	typeref:typename:uint8_t	file:
+scene_pause	i2c/compass-switch.c	/^	int scene_pause;$/;"	m	struct:glb	typeref:typename:int	file:
+scene_state	i2c/compass-switch.c	/^	int scene_state;$/;"	m	struct:glb	typeref:typename:int	file:
+show_help	i2c/compass-switch.c	/^void show_help(void) {$/;"	f	typeref:typename:void
+show_help	pld-usbc-meter.cpp	/^void show_help(void) {$/;"	f	typeref:typename:void
+start_angle	i2c/compass-switch.c	/^	int start_angle;$/;"	m	struct:glb	typeref:typename:int	file:
+strip	Makefile	/^strip:$/;"	t
+tokenise_keycodes	i2c/compass-switch.c	/^int tokenise_keycodes( int *keyvalues, int maxvalues, char *keycodes ) {$/;"	f	typeref:typename:int
+ubus	i2c/compass-switch.c	/^	int ubus; \/\/ user defined bus$/;"	m	struct:glb	typeref:typename:int	file:
+uinput_done	i2c/compass-switch.c	/^void uinput_done( void ) {$/;"	f	typeref:typename:void
+uinput_emit	i2c/compass-switch.c	/^void uinput_emit( int fd, int type, int code, int val ) {$/;"	f	typeref:typename:void
+uinput_init	i2c/compass-switch.c	/^int uinput_init( struct glb *g ) {$/;"	f	typeref:typename:int
+uinput_press_keys	i2c/compass-switch.c	/^int uinput_press_keys( int fd, int *keyvalues ) {$/;"	f	typeref:typename:int
+usetup	i2c/compass-switch.c	/^	struct uinput_setup usetup;  \/\/ input dev struct$/;"	m	struct:glb	typeref:struct:uinput_setup	file:
+verbose	i2c.c	/^static int verbose = 0;$/;"	v	typeref:typename:int	file:
+verbose	i2c/compass-switch.c	/^	int verbose;$/;"	m	struct:glb	typeref:typename:int	file:
+verbose	i2c/i2c.c	/^static int verbose = 0;$/;"	v	typeref:typename:int	file:
+window_height	pld-usbc-meter.cpp	/^	int window_width, window_height;$/;"	m	struct:glb	typeref:typename:int	file:
+window_width	pld-usbc-meter.cpp	/^	int window_width, window_height;$/;"	m	struct:glb	typeref:typename:int	file:
+wx_forced	pld-usbc-meter.cpp	/^	int wx_forced, wy_forced;$/;"	m	struct:glb	typeref:typename:int	file:
+wy_forced	pld-usbc-meter.cpp	/^	int wx_forced, wy_forced;$/;"	m	struct:glb	typeref:typename:int	file:

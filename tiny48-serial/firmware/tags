@@ -1,0 +1,508 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/pld/development/pld/pld-usbc-meter/serial-version/firmware/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+#doc-content	doxygen.css	/^  #doc-content$/;"	i
+#nav-path	doxygen.css	/^  #nav-path { display: none; }$/;"	i
+#powerTip	doxygen.css	/^#powerTip {$/;"	i
+#powerTip div	doxygen.css	/^#powerTip div {$/;"	s
+#powerTip div.ttdeci	doxygen.css	/^#powerTip div.ttdeci {$/;"	c
+#powerTip div.ttdoc	doxygen.css	/^#powerTip div.ttdoc {$/;"	c
+#powerTip div.ttname	doxygen.css	/^#powerTip div.ttname {$/;"	c
+#powerTip div.ttname a	doxygen.css	/^#powerTip div.ttname a {$/;"	s
+#powerTip.e:after	doxygen.css	/^#powerTip.e:after {$/;"	c
+#powerTip.e:after	doxygen.css	/^#powerTip.e:after,  #powerTip.e:before,$/;"	c
+#powerTip.e:after	doxygen.css	/^#powerTip.e:after, #powerTip.e:before {$/;"	c
+#powerTip.e:after	doxygen.css	/^#powerTip.w:after,  #powerTip.e:after,$/;"	c
+#powerTip.e:before	doxygen.css	/^#powerTip.e:after,  #powerTip.e:before,$/;"	c
+#powerTip.e:before	doxygen.css	/^#powerTip.e:after, #powerTip.e:before {$/;"	c
+#powerTip.e:before	doxygen.css	/^#powerTip.e:before {$/;"	c
+#powerTip.e:before	doxygen.css	/^#powerTip.w:before,  #powerTip.e:before,$/;"	c
+#powerTip.n:after	doxygen.css	/^#powerTip.n:after,  #powerTip.n:before,$/;"	c
+#powerTip.n:after	doxygen.css	/^#powerTip.n:after,  #powerTip.s:after,$/;"	c
+#powerTip.n:after	doxygen.css	/^#powerTip.n:after, #powerTip.n:before {$/;"	c
+#powerTip.n:after	doxygen.css	/^#powerTip.n:after, #powerTip.ne:after, #powerTip.nw:after {$/;"	c
+#powerTip.n:before	doxygen.css	/^#powerTip.n:after,  #powerTip.n:before,$/;"	c
+#powerTip.n:before	doxygen.css	/^#powerTip.n:after, #powerTip.n:before {$/;"	c
+#powerTip.n:before	doxygen.css	/^#powerTip.n:before {$/;"	c
+#powerTip.n:before	doxygen.css	/^#powerTip.n:before,  #powerTip.s:before,$/;"	c
+#powerTip.ne:after	doxygen.css	/^#powerTip.n:after, #powerTip.ne:after, #powerTip.nw:after {$/;"	c
+#powerTip.ne:after	doxygen.css	/^#powerTip.ne:after, #powerTip.ne:before {$/;"	c
+#powerTip.ne:after	doxygen.css	/^#powerTip.ne:after, #powerTip.ne:before,$/;"	c
+#powerTip.ne:after	doxygen.css	/^#powerTip.nw:after, #powerTip.ne:after,$/;"	c
+#powerTip.ne:before	doxygen.css	/^#powerTip.ne:after, #powerTip.ne:before {$/;"	c
+#powerTip.ne:before	doxygen.css	/^#powerTip.ne:after, #powerTip.ne:before,$/;"	c
+#powerTip.ne:before	doxygen.css	/^#powerTip.nw:before, #powerTip.ne:before,$/;"	c
+#powerTip.nw:after	doxygen.css	/^#powerTip.n:after, #powerTip.ne:after, #powerTip.nw:after {$/;"	c
+#powerTip.nw:after	doxygen.css	/^#powerTip.nw:after, #powerTip.ne:after,$/;"	c
+#powerTip.nw:after	doxygen.css	/^#powerTip.nw:after, #powerTip.nw:before {$/;"	c
+#powerTip.nw:after	doxygen.css	/^#powerTip.nw:after, #powerTip.nw:before,$/;"	c
+#powerTip.nw:before	doxygen.css	/^#powerTip.nw:after, #powerTip.nw:before {$/;"	c
+#powerTip.nw:before	doxygen.css	/^#powerTip.nw:after, #powerTip.nw:before,$/;"	c
+#powerTip.nw:before	doxygen.css	/^#powerTip.nw:before, #powerTip.ne:before,$/;"	c
+#powerTip.s:after	doxygen.css	/^#powerTip.n:after,  #powerTip.s:after,$/;"	c
+#powerTip.s:after	doxygen.css	/^#powerTip.s:after,  #powerTip.s:before,$/;"	c
+#powerTip.s:after	doxygen.css	/^#powerTip.s:after, #powerTip.s:before {$/;"	c
+#powerTip.s:after	doxygen.css	/^#powerTip.s:after, #powerTip.se:after, #powerTip.sw:after {$/;"	c
+#powerTip.s:before	doxygen.css	/^#powerTip.n:before,  #powerTip.s:before,$/;"	c
+#powerTip.s:before	doxygen.css	/^#powerTip.s:after,  #powerTip.s:before,$/;"	c
+#powerTip.s:before	doxygen.css	/^#powerTip.s:after, #powerTip.s:before {$/;"	c
+#powerTip.s:before	doxygen.css	/^#powerTip.s:before, #powerTip.se:before, #powerTip.sw:before {$/;"	c
+#powerTip.se:after	doxygen.css	/^#powerTip.s:after, #powerTip.se:after, #powerTip.sw:after {$/;"	c
+#powerTip.se:after	doxygen.css	/^#powerTip.se:after, #powerTip.se:before {$/;"	c
+#powerTip.se:after	doxygen.css	/^#powerTip.se:after, #powerTip.se:before,$/;"	c
+#powerTip.se:after	doxygen.css	/^#powerTip.sw:after, #powerTip.se:after {$/;"	c
+#powerTip.se:before	doxygen.css	/^#powerTip.s:before, #powerTip.se:before, #powerTip.sw:before {$/;"	c
+#powerTip.se:before	doxygen.css	/^#powerTip.se:after, #powerTip.se:before {$/;"	c
+#powerTip.se:before	doxygen.css	/^#powerTip.se:after, #powerTip.se:before,$/;"	c
+#powerTip.se:before	doxygen.css	/^#powerTip.sw:before, #powerTip.se:before {$/;"	c
+#powerTip.sw:after	doxygen.css	/^#powerTip.s:after, #powerTip.se:after, #powerTip.sw:after {$/;"	c
+#powerTip.sw:after	doxygen.css	/^#powerTip.sw:after, #powerTip.se:after {$/;"	c
+#powerTip.sw:after	doxygen.css	/^#powerTip.sw:after, #powerTip.sw:before {$/;"	c
+#powerTip.sw:before	doxygen.css	/^#powerTip.s:before, #powerTip.se:before, #powerTip.sw:before {$/;"	c
+#powerTip.sw:before	doxygen.css	/^#powerTip.sw:after, #powerTip.sw:before {$/;"	c
+#powerTip.sw:before	doxygen.css	/^#powerTip.sw:before, #powerTip.se:before {$/;"	c
+#powerTip.w:after	doxygen.css	/^#powerTip.w:after {$/;"	c
+#powerTip.w:after	doxygen.css	/^#powerTip.w:after,  #powerTip.e:after,$/;"	c
+#powerTip.w:after	doxygen.css	/^#powerTip.w:after,  #powerTip.w:before,$/;"	c
+#powerTip.w:after	doxygen.css	/^#powerTip.w:after, #powerTip.w:before {$/;"	c
+#powerTip.w:before	doxygen.css	/^#powerTip.w:after,  #powerTip.w:before,$/;"	c
+#powerTip.w:before	doxygen.css	/^#powerTip.w:after, #powerTip.w:before {$/;"	c
+#powerTip.w:before	doxygen.css	/^#powerTip.w:before {$/;"	c
+#powerTip.w:before	doxygen.css	/^#powerTip.w:before,  #powerTip.e:before,$/;"	c
+#powerTip:after	doxygen.css	/^#powerTip:before, #powerTip:after {$/;"	i
+#powerTip:before	doxygen.css	/^#powerTip:before, #powerTip:after {$/;"	i
+#projectbrief	doxygen.css	/^#projectbrief$/;"	i
+#projectlogo	doxygen.css	/^#projectlogo$/;"	i
+#projectlogo img	doxygen.css	/^#projectlogo img$/;"	s
+#projectname	doxygen.css	/^#projectname$/;"	i
+#projectnumber	doxygen.css	/^#projectnumber$/;"	i
+#side-nav	doxygen.css	/^  #side-nav { display: none; }$/;"	i
+#titlearea	doxygen.css	/^#titlearea$/;"	i
+#top	doxygen.css	/^  #top { display: none; }$/;"	i
+%.hex	Makefile	/^%.hex : %.obj$/;"	t
+%.obj	Makefile	/^%.obj : %.o$/;"	t
+.arrow	doxygen.css	/^.arrow {$/;"	c
+.caption	doxygen.css	/^.caption$/;"	c
+.contents a.qindexHL:visited	doxygen.css	/^.contents a.qindexHL:visited {$/;"	c
+.contents a:visited	doxygen.css	/^.contents a:visited {$/;"	s
+.diagraph	doxygen.css	/^.diagraph$/;"	c
+.directory .levels	doxygen.css	/^.directory .levels {$/;"	c
+.directory .levels span	doxygen.css	/^.directory .levels span {$/;"	s
+.directory img	doxygen.css	/^.directory img {$/;"	s
+.directory table	doxygen.css	/^.directory table {$/;"	s
+.directory td	doxygen.css	/^.directory td {$/;"	s
+.directory td.desc	doxygen.css	/^.directory td.desc {$/;"	c
+.directory td.entry	doxygen.css	/^.directory td.entry {$/;"	c
+.directory td.entry a	doxygen.css	/^.directory td.entry a {$/;"	s
+.directory td.entry a img	doxygen.css	/^.directory td.entry a img {$/;"	s
+.directory tr.even	doxygen.css	/^.directory tr.even {$/;"	c
+.dirtab	doxygen.css	/^.dirtab {$/;"	c
+.dotgraph	doxygen.css	/^.dotgraph$/;"	c
+.exception	doxygen.css	/^.params, .retval, .exception, .tparams {$/;"	c
+.fieldtable td	doxygen.css	/^.fieldtable td, .fieldtable th {$/;"	s
+.fieldtable td.fielddoc	doxygen.css	/^.fieldtable td.fielddoc {$/;"	c
+.fieldtable td.fielddoc p:first-child	doxygen.css	/^.fieldtable td.fielddoc p:first-child {$/;"	s
+.fieldtable td.fielddoc p:last-child	doxygen.css	/^.fieldtable td.fielddoc p:last-child {$/;"	s
+.fieldtable td.fieldname	doxygen.css	/^.fieldtable td.fieldname {$/;"	c
+.fieldtable td.fieldname	doxygen.css	/^.fieldtable td.fieldtype, .fieldtable td.fieldname {$/;"	c
+.fieldtable td.fieldtype	doxygen.css	/^.fieldtable td.fieldtype, .fieldtable td.fieldname {$/;"	c
+.fieldtable th	doxygen.css	/^.fieldtable td, .fieldtable th {$/;"	s
+.fieldtable th	doxygen.css	/^.fieldtable th {$/;"	s
+.fieldtable tr	doxygen.css	/^.memberdecls td, .fieldtable tr {$/;"	s
+.fieldtable tr.glow	doxygen.css	/^.memberdecls td.glow, .fieldtable tr.glow {$/;"	c
+.fieldtable tr:last-child td	doxygen.css	/^.fieldtable tr:last-child td {$/;"	s
+.icon	doxygen.css	/^.icon {$/;"	c
+.icona	doxygen.css	/^.icona {$/;"	c
+.icondoc	doxygen.css	/^.icondoc {$/;"	c
+.iconfclosed	doxygen.css	/^.iconfclosed {$/;"	c
+.iconfopen	doxygen.css	/^.iconfopen {$/;"	c
+.image	doxygen.css	/^.image$/;"	c
+.inherit	doxygen.css	/^.inherit {$/;"	c
+.inherit_header	doxygen.css	/^.inherit_header {$/;"	c
+.inherit_header td	doxygen.css	/^.inherit_header td {$/;"	s
+.mdescLeft	doxygen.css	/^.mdescLeft, .mdescRight {$/;"	c
+.mdescLeft	doxygen.css	/^.mdescLeft, .mdescRight,$/;"	c
+.mdescRight	doxygen.css	/^.mdescLeft, .mdescRight {$/;"	c
+.mdescRight	doxygen.css	/^.mdescLeft, .mdescRight,$/;"	c
+.memItemLeft	doxygen.css	/^.memItemLeft, .memItemRight,$/;"	c
+.memItemLeft	doxygen.css	/^.memItemLeft, .memTemplItemLeft {$/;"	c
+.memItemRight	doxygen.css	/^.memItemLeft, .memItemRight,$/;"	c
+.memItemRight	doxygen.css	/^.memItemRight {$/;"	c
+.memSeparator	doxygen.css	/^.memSeparator {$/;"	c
+.memTemplItemLeft	doxygen.css	/^.memItemLeft, .memTemplItemLeft {$/;"	c
+.memTemplItemLeft	doxygen.css	/^.memTemplItemLeft, .memTemplItemRight, .memTemplParams {$/;"	c
+.memTemplItemRight	doxygen.css	/^.memTemplItemLeft, .memTemplItemRight, .memTemplParams {$/;"	c
+.memTemplParams	doxygen.css	/^.memTemplItemLeft, .memTemplItemRight, .memTemplParams {$/;"	c
+.memTemplParams	doxygen.css	/^.memTemplParams {$/;"	c
+.memberdecls td	doxygen.css	/^.memberdecls td, .fieldtable tr {$/;"	s
+.memberdecls td.glow	doxygen.css	/^.memberdecls td.glow, .fieldtable tr.glow {$/;"	c
+.memdoc	doxygen.css	/^.memdoc, dl.reflist dd {$/;"	c
+.memitem	doxygen.css	/^  .memitem { page-break-inside: avoid; }$/;"	c
+.memitem	doxygen.css	/^.memitem {$/;"	c
+.memitem.glow	doxygen.css	/^.memitem.glow {$/;"	c
+.memname	doxygen.css	/^.memname {$/;"	c
+.memname td	doxygen.css	/^.memname td {$/;"	s
+.memnav	doxygen.css	/^.memnav {$/;"	c
+.mempage	doxygen.css	/^.mempage {$/;"	c
+.memproto	doxygen.css	/^.memproto, dl.reflist dt {$/;"	c
+.memtemplate	doxygen.css	/^.memtemplate {$/;"	c
+.mscgraph	doxygen.css	/^.mscgraph$/;"	c
+.navpath li	doxygen.css	/^.navpath li$/;"	s
+.navpath li.footer	doxygen.css	/^.navpath li.footer$/;"	c
+.navpath li.navelem a	doxygen.css	/^.navpath li.navelem a$/;"	s
+.navpath li.navelem a:hover	doxygen.css	/^.navpath li.navelem a:hover$/;"	s
+.navpath ul	doxygen.css	/^.navpath ul$/;"	s
+.paramkey	doxygen.css	/^.paramkey {$/;"	c
+.paramname	doxygen.css	/^.paramname {$/;"	c
+.paramname code	doxygen.css	/^.paramname code {$/;"	s
+.paramname em	doxygen.css	/^.paramname em {$/;"	s
+.params	doxygen.css	/^.params, .retval, .exception, .tparams {$/;"	c
+.params .paramdir	doxygen.css	/^.params .paramdir {$/;"	c
+.params .paramname	doxygen.css	/^.params .paramname, .retval .paramname {$/;"	c
+.params .paramtype	doxygen.css	/^.params .paramtype {$/;"	c
+.paramtype	doxygen.css	/^.paramtype {$/;"	c
+.retval	doxygen.css	/^.params, .retval, .exception, .tparams {$/;"	c
+.retval .paramname	doxygen.css	/^.params .paramname, .retval .paramname {$/;"	c
+.summary	doxygen.css	/^  .summary { display: none; }$/;"	c
+.tabsearch	doxygen.css	/^.tabsearch {$/;"	c
+.title	doxygen.css	/^.title {$/;"	c
+.tparams	doxygen.css	/^.params, .retval, .exception, .tparams {$/;"	c
+.ttc	doxygen.css	/^.ttc {$/;"	c
+CC	Makefile	/^CC=avr-gcc $/;"	m
+CFLAGS	Makefile	/^CFLAGS=-Wall -Os  -mmcu=$(UC)$/;"	m
+CONTRAST	pld-usbc-meter-serial-firmware.c	/^#define CONTRAST /;"	d	file:
+Detailed Description	manual__i2cmaster.html	/^<a name="details" id="details"><\/a><h2 class="groupheader">Detailed Description<\/h2>$/;"	i
+Dev24C02	test_i2cmaster.c	/^#define Dev24C02 /;"	d	file:
+F_CPU	pld-usbc-meter-serial-firmware.c	/^#define F_CPU /;"	d	file:
+F_CPU	twimaster.c	/^#define F_CPU /;"	d	file:
+F_OSC	pld-usbc-meter-serial-firmware.c	/^#define F_OSC /;"	d	file:
+Function Documentation	manual__i2cmaster.html	/^<h2 class="groupheader">Function Documentation<\/h2>$/;"	i
+Functions	manual__i2cmaster.html	/^Functions<\/h2><\/td><\/tr>$/;"	i
+I2C_READ	i2cmaster.h	/^#define I2C_READ /;"	d
+I2C_WRITE	i2cmaster.h	/^#define I2C_WRITE /;"	d
+INA219	pld-usbc-meter-serial-firmware.c	/^#define INA219 /;"	d	file:
+L2	test_i2cmaster.s	/^.L2:$/;"	l
+L3	test_i2cmaster.s	/^.L3:$/;"	l
+L4	test_i2cmaster.s	/^.L4:$/;"	l
+LASF0	test_i2cmaster.s	/^.LASF0:$/;"	l
+LASF1	test_i2cmaster.s	/^.LASF1:$/;"	l
+LASF10	test_i2cmaster.s	/^.LASF10:$/;"	l
+LASF11	test_i2cmaster.s	/^.LASF11:$/;"	l
+LASF12	test_i2cmaster.s	/^.LASF12:$/;"	l
+LASF13	test_i2cmaster.s	/^.LASF13:$/;"	l
+LASF14	test_i2cmaster.s	/^.LASF14:$/;"	l
+LASF15	test_i2cmaster.s	/^.LASF15:$/;"	l
+LASF16	test_i2cmaster.s	/^.LASF16:$/;"	l
+LASF17	test_i2cmaster.s	/^.LASF17:$/;"	l
+LASF18	test_i2cmaster.s	/^.LASF18:$/;"	l
+LASF19	test_i2cmaster.s	/^.LASF19:$/;"	l
+LASF2	test_i2cmaster.s	/^.LASF2:$/;"	l
+LASF3	test_i2cmaster.s	/^.LASF3:$/;"	l
+LASF4	test_i2cmaster.s	/^.LASF4:$/;"	l
+LASF5	test_i2cmaster.s	/^.LASF5:$/;"	l
+LASF6	test_i2cmaster.s	/^.LASF6:$/;"	l
+LASF7	test_i2cmaster.s	/^.LASF7:$/;"	l
+LASF8	test_i2cmaster.s	/^.LASF8:$/;"	l
+LASF9	test_i2cmaster.s	/^.LASF9:$/;"	l
+LCD	pld-usbc-meter-serial-firmware.c	/^#define LCD /;"	d	file:
+LFB0	test_i2cmaster.s	/^.LFB0:$/;"	l
+LFE0	test_i2cmaster.s	/^.LFE0:$/;"	l
+LLST0	test_i2cmaster.s	/^.LLST0:$/;"	l
+LVL0	test_i2cmaster.s	/^.LVL0:$/;"	l
+LVL1	test_i2cmaster.s	/^.LVL1:$/;"	l
+LVL10	test_i2cmaster.s	/^.LVL10:$/;"	l
+LVL11	test_i2cmaster.s	/^.LVL11:$/;"	l
+LVL12	test_i2cmaster.s	/^.LVL12:$/;"	l
+LVL13	test_i2cmaster.s	/^.LVL13:$/;"	l
+LVL14	test_i2cmaster.s	/^.LVL14:$/;"	l
+LVL15	test_i2cmaster.s	/^.LVL15:$/;"	l
+LVL16	test_i2cmaster.s	/^.LVL16:$/;"	l
+LVL17	test_i2cmaster.s	/^.LVL17:$/;"	l
+LVL18	test_i2cmaster.s	/^.LVL18:$/;"	l
+LVL19	test_i2cmaster.s	/^.LVL19:$/;"	l
+LVL2	test_i2cmaster.s	/^.LVL2:$/;"	l
+LVL20	test_i2cmaster.s	/^.LVL20:$/;"	l
+LVL21	test_i2cmaster.s	/^.LVL21:$/;"	l
+LVL22	test_i2cmaster.s	/^.LVL22:$/;"	l
+LVL23	test_i2cmaster.s	/^.LVL23:$/;"	l
+LVL24	test_i2cmaster.s	/^.LVL24:$/;"	l
+LVL25	test_i2cmaster.s	/^.LVL25:$/;"	l
+LVL26	test_i2cmaster.s	/^.LVL26:$/;"	l
+LVL27	test_i2cmaster.s	/^.LVL27:$/;"	l
+LVL28	test_i2cmaster.s	/^.LVL28:$/;"	l
+LVL29	test_i2cmaster.s	/^.LVL29:$/;"	l
+LVL3	test_i2cmaster.s	/^.LVL3:$/;"	l
+LVL30	test_i2cmaster.s	/^.LVL30:$/;"	l
+LVL31	test_i2cmaster.s	/^.LVL31:$/;"	l
+LVL32	test_i2cmaster.s	/^.LVL32:$/;"	l
+LVL4	test_i2cmaster.s	/^.LVL4:$/;"	l
+LVL5	test_i2cmaster.s	/^.LVL5:$/;"	l
+LVL6	test_i2cmaster.s	/^.LVL6:$/;"	l
+LVL7	test_i2cmaster.s	/^.LVL7:$/;"	l
+LVL8	test_i2cmaster.s	/^.LVL8:$/;"	l
+LVL9	test_i2cmaster.s	/^.LVL9:$/;"	l
+L__stack_usage	test_i2cmaster.s	/^.L__stack_usage = 0$/;"	d
+Ldebug_abbrev0	test_i2cmaster.s	/^.Ldebug_abbrev0:$/;"	l
+Ldebug_info0	test_i2cmaster.s	/^.Ldebug_info0:$/;"	l
+Ldebug_line0	test_i2cmaster.s	/^.Ldebug_line0:$/;"	l
+Ldebug_loc0	test_i2cmaster.s	/^.Ldebug_loc0:$/;"	l
+Ldebug_ranges0	test_i2cmaster.s	/^.Ldebug_ranges0:$/;"	l
+Letext0	test_i2cmaster.s	/^.Letext0:$/;"	l
+Ltext0	test_i2cmaster.s	/^.Ltext0:$/;"	l
+Macro Definition Documentation	manual__i2cmaster.html	/^<h2 class="groupheader">Macro Definition Documentation<\/h2>$/;"	i
+Macros	manual__i2cmaster.html	/^Macros<\/h2><\/td><\/tr>$/;"	i
+OBJ2HEX	Makefile	/^OBJ2HEX=avr-objcopy $/;"	m
+OBJECTS	Makefile	/^OBJECTS=i2cmaster.o$/;"	m
+PROGRAMER	Makefile	/^PROGRAMER=usbtiny$/;"	m
+SCL	i2cmaster.S	/^#define SCL /;"	d	file:
+SCL_CLOCK	twimaster.c	/^#define SCL_CLOCK /;"	d	file:
+SCL_DDR	i2cmaster.S	/^#define SCL_DDR	/;"	d	file:
+SCL_IN	i2cmaster.S	/^#define SCL_IN	/;"	d	file:
+SCL_OUT	i2cmaster.S	/^#define SCL_OUT	/;"	d	file:
+SCL_PORT	i2cmaster.S	/^#define SCL_PORT /;"	d	file:
+SDA	i2cmaster.S	/^#define SDA /;"	d	file:
+SDA_DDR	i2cmaster.S	/^#define SDA_DDR	/;"	d	file:
+SDA_IN	i2cmaster.S	/^#define SDA_IN	/;"	d	file:
+SDA_OUT	i2cmaster.S	/^#define SDA_OUT	/;"	d	file:
+SDA_PORT	i2cmaster.S	/^#define SDA_PORT /;"	d	file:
+TARGET	Makefile	/^TARGET=pld-usbc-meter-serial-firmware$/;"	m
+UC	Makefile	/^UC=attiny45$/;"	m
+UR_BAUDRATE	pld-usbc-meter-serial-firmware.c	/^#define UR_BAUDRATE	/;"	d	file:
+UR_RX_BIT	pld-usbc-meter-serial-firmware.c	/^#define UR_RX_BIT	/;"	d	file:
+UR_TX_BIT	pld-usbc-meter-serial-firmware.c	/^#define UR_TX_BIT	/;"	d	file:
+UR_TX_DDR	pld-usbc-meter-serial-firmware.c	/^#define UR_TX_DDR	/;"	d	file:
+UR_TX_NUM_ADD_NOP	pld-usbc-meter-serial-firmware.c	/^#define UR_TX_NUM_ADD_NOP	/;"	d	file:
+UR_TX_NUM_DELAY_CYCLES	pld-usbc-meter-serial-firmware.c	/^#define UR_TX_NUM_DELAY_CYCLES	/;"	d	file:
+UR_TX_PORT	pld-usbc-meter-serial-firmware.c	/^#define UR_TX_PORT	/;"	d	file:
+VOLTAGE_QUANTA	pld-usbc-meter-serial-firmware.c	/^#define VOLTAGE_QUANTA /;"	d	file:
+_I2CMASTER_H	i2cmaster.h	/^#define _I2CMASTER_H$/;"	d
+__SP_H__	test_i2cmaster.s	/^__SP_H__ = 0x3e$/;"	d
+__SP_L__	test_i2cmaster.s	/^__SP_L__ = 0x3d$/;"	d
+__SREG__	test_i2cmaster.s	/^__SREG__ = 0x3f$/;"	d
+__tmp_reg__	i2cmaster.S	/^#define __tmp_reg__ /;"	d	file:
+__tmp_reg__	test_i2cmaster.s	/^__tmp_reg__ = 0$/;"	d
+__zero_reg__	test_i2cmaster.s	/^__zero_reg__ = 1$/;"	d
+a	doxygen.css	/^a {$/;"	s
+a.code	doxygen.css	/^a.code, a.code:visited, a.line, a.line:visited {$/;"	c
+a.code:visited	doxygen.css	/^a.code, a.code:visited, a.line, a.line:visited {$/;"	c
+a.codeRef	doxygen.css	/^a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {$/;"	c
+a.codeRef:visited	doxygen.css	/^a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {$/;"	c
+a.el	doxygen.css	/^a.el {$/;"	c
+a.elRef	doxygen.css	/^a.elRef {$/;"	c
+a.line	doxygen.css	/^a.code, a.code:visited, a.line, a.line:visited {$/;"	c
+a.line:visited	doxygen.css	/^a.code, a.code:visited, a.line, a.line:visited {$/;"	c
+a.lineRef	doxygen.css	/^a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {$/;"	c
+a.lineRef:visited	doxygen.css	/^a.codeRef, a.codeRef:visited, a.lineRef, a.lineRef:visited {$/;"	c
+a.qindex	doxygen.css	/^a.qindex {$/;"	c
+a.qindexHL	doxygen.css	/^a.qindexHL {$/;"	c
+a:hover	doxygen.css	/^a:hover {$/;"	s
+address	doxygen.css	/^address {$/;"	s
+address.footer	doxygen.css	/^address.footer {$/;"	c
+blockquote	doxygen.css	/^blockquote {$/;"	s
+body	doxygen.css	/^  body { overflow:visible; }$/;"	s
+body	doxygen.css	/^body {$/;"	s
+body	doxygen.css	/^body, table, div, p, dl {$/;"	s
+burn	Makefile	/^burn: pld-usbc-meter-serial-firmware.hex$/;"	t
+caption	doxygen.css	/^caption {$/;"	s
+clean	Makefile	/^clean :$/;"	t
+default	Makefile	/^default: lom$/;"	t
+define-members	manual__i2cmaster.html	/^<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"><\/a>$/;"	a
+details	manual__i2cmaster.html	/^<a name="details" id="details"><\/a><h2 class="groupheader">Detailed Description<\/h2>$/;"	I
+details	manual__i2cmaster.html	/^<a name="details" id="details"><\/a><h2 class="groupheader">Detailed Description<\/h2>$/;"	a
+div	doxygen.css	/^body, table, div, p, dl {$/;"	s
+div.ah	doxygen.css	/^div.ah, span.ah {$/;"	c
+div.center	doxygen.css	/^div.center {$/;"	c
+div.center img	doxygen.css	/^div.center img {$/;"	s
+div.classindex span.ai	doxygen.css	/^div.classindex span.ai {$/;"	c
+div.classindex ul	doxygen.css	/^div.classindex ul {$/;"	s
+div.contents	doxygen.css	/^div.contents {$/;"	c
+div.directory	doxygen.css	/^div.directory {$/;"	c
+div.dynheader	doxygen.css	/^div.dynheader {$/;"	c
+div.fragment	doxygen.css	/^div.fragment {$/;"	c
+div.groupHeader	doxygen.css	/^div.groupHeader {$/;"	c
+div.groupText	doxygen.css	/^div.groupText {$/;"	c
+div.header	doxygen.css	/^div.header$/;"	c
+div.headertitle	doxygen.css	/^div.headertitle$/;"	c
+div.ingroups	doxygen.css	/^div.ingroups$/;"	c
+div.ingroups a	doxygen.css	/^div.ingroups a$/;"	s
+div.line	doxygen.css	/^div.line {$/;"	c
+div.line.glow	doxygen.css	/^div.line.glow {$/;"	c
+div.multicol	doxygen.css	/^div.multicol {$/;"	c
+div.navpath	doxygen.css	/^div.qindex, div.navpath {$/;"	c
+div.navtab	doxygen.css	/^div.navtab {$/;"	c
+div.navtab	doxygen.css	/^div.qindex, div.navtab{$/;"	c
+div.qindex	doxygen.css	/^div.qindex, div.navpath {$/;"	c
+div.qindex	doxygen.css	/^div.qindex, div.navtab{$/;"	c
+div.summary	doxygen.css	/^div.summary$/;"	c
+div.summary a	doxygen.css	/^div.summary a$/;"	s
+div.toc	doxygen.css	/^div.toc {$/;"	c
+div.toc h3	doxygen.css	/^div.toc h3 {$/;"	s
+div.toc li	doxygen.css	/^div.toc li {$/;"	s
+div.toc li.level1	doxygen.css	/^div.toc li.level1 {$/;"	c
+div.toc li.level2	doxygen.css	/^div.toc li.level2 {$/;"	c
+div.toc li.level3	doxygen.css	/^div.toc li.level3 {$/;"	c
+div.toc li.level4	doxygen.css	/^div.toc li.level4 {$/;"	c
+div.toc ul	doxygen.css	/^div.toc ul {$/;"	s
+div.zoom	doxygen.css	/^div.zoom$/;"	c
+dl	doxygen.css	/^body, table, div, p, dl {$/;"	s
+dl	doxygen.css	/^dl$/;"	s
+dl.attention	doxygen.css	/^dl.warning, dl.attention$/;"	c
+dl.bug	doxygen.css	/^dl.bug$/;"	c
+dl.citelist	doxygen.css	/^dl.citelist {$/;"	c
+dl.citelist dd	doxygen.css	/^dl.citelist dd {$/;"	s
+dl.citelist dt	doxygen.css	/^dl.citelist dt {$/;"	s
+dl.deprecated	doxygen.css	/^dl.deprecated$/;"	c
+dl.el	doxygen.css	/^dl.el {$/;"	c
+dl.invariant	doxygen.css	/^dl.pre, dl.post, dl.invariant$/;"	c
+dl.note	doxygen.css	/^dl.note$/;"	c
+dl.post	doxygen.css	/^dl.pre, dl.post, dl.invariant$/;"	c
+dl.pre	doxygen.css	/^dl.pre, dl.post, dl.invariant$/;"	c
+dl.reflist dd	doxygen.css	/^.memdoc, dl.reflist dd {$/;"	s
+dl.reflist dd	doxygen.css	/^dl.reflist dd {$/;"	s
+dl.reflist dt	doxygen.css	/^.memproto, dl.reflist dt {$/;"	s
+dl.reflist dt	doxygen.css	/^dl.reflist dt {$/;"	s
+dl.section	doxygen.css	/^dl.section$/;"	c
+dl.section dd	doxygen.css	/^dl.section dd {$/;"	s
+dl.test	doxygen.css	/^dl.test$/;"	c
+dl.todo	doxygen.css	/^dl.todo$/;"	c
+dl.warning	doxygen.css	/^dl.warning, dl.attention$/;"	c
+dt	doxygen.css	/^dt {$/;"	s
+func-members	manual__i2cmaster.html	/^<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"><\/a>$/;"	a
+ga32ac22052d55f93375b024192217db21	manual__i2cmaster.html	/^<a class="anchor" id="ga32ac22052d55f93375b024192217db21"><\/a>$/;"	I
+ga5730d9445429351b9f750084c5cb5aae	manual__i2cmaster.html	/^<a class="anchor" id="ga5730d9445429351b9f750084c5cb5aae"><\/a>$/;"	I
+ga58dfadce0c2fee4bfac01df6cd2b4477	manual__i2cmaster.html	/^<a class="anchor" id="ga58dfadce0c2fee4bfac01df6cd2b4477"><\/a>$/;"	I
+ga669c0357614a79b3b35ae815f6f50e82	manual__i2cmaster.html	/^<a class="anchor" id="ga669c0357614a79b3b35ae815f6f50e82"><\/a>$/;"	I
+ga93a9461da34295250ba935bbce9a980d	manual__i2cmaster.html	/^<a class="anchor" id="ga93a9461da34295250ba935bbce9a980d"><\/a>$/;"	I
+ga9536bf85bced4f4e549a82fb18eb6140	manual__i2cmaster.html	/^<a class="anchor" id="ga9536bf85bced4f4e549a82fb18eb6140"><\/a>$/;"	I
+gab5c0fbe837494c5f9130a5914854250d	manual__i2cmaster.html	/^<a class="anchor" id="gab5c0fbe837494c5f9130a5914854250d"><\/a>$/;"	I
+gad33503cf741851d1bca1d274e9001796	manual__i2cmaster.html	/^<tr class="memitem:gad33503cf741851d1bca1d274e9001796"><td class="memItemLeft" align="right" val/;"	I
+gad35d4e4f52ca74b503d5e5e1e0a3f5f3	manual__i2cmaster.html	/^<a class="anchor" id="gad35d4e4f52ca74b503d5e5e1e0a3f5f3"><\/a>$/;"	I
+gad89e839fc17b05fbb5dd79897c55234e	manual__i2cmaster.html	/^<a class="anchor" id="gad89e839fc17b05fbb5dd79897c55234e"><\/a>$/;"	I
+gadd947aade44ed6b7f92265f9dec4a711	manual__i2cmaster.html	/^<a class="anchor" id="gadd947aade44ed6b7f92265f9dec4a711"><\/a>$/;"	I
+gaee3747a01738315cd5580588994b6c28	manual__i2cmaster.html	/^<a class="anchor" id="gaee3747a01738315cd5580588994b6c28"><\/a>$/;"	I
+h1	doxygen.css	/^  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }$/;"	s
+h1	doxygen.css	/^h1, h2, h3, h4, h5, h6 {$/;"	s
+h1.glow	doxygen.css	/^h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {$/;"	c
+h1.groupheader	doxygen.css	/^h1.groupheader {$/;"	c
+h2	doxygen.css	/^  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }$/;"	s
+h2	doxygen.css	/^h1, h2, h3, h4, h5, h6 {$/;"	s
+h2.glow	doxygen.css	/^h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {$/;"	c
+h2.groupheader	doxygen.css	/^h2.groupheader {$/;"	c
+h3	doxygen.css	/^  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }$/;"	s
+h3	doxygen.css	/^h1, h2, h3, h4, h5, h6 {$/;"	s
+h3.glow	doxygen.css	/^h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {$/;"	c
+h3.groupheader	doxygen.css	/^h3.groupheader {$/;"	c
+h3.version	doxygen.css	/^h3.version {$/;"	c
+h4	doxygen.css	/^  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }$/;"	s
+h4	doxygen.css	/^h1, h2, h3, h4, h5, h6 {$/;"	s
+h4.glow	doxygen.css	/^h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {$/;"	c
+h5	doxygen.css	/^  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }$/;"	s
+h5	doxygen.css	/^h1, h2, h3, h4, h5, h6 {$/;"	s
+h5.glow	doxygen.css	/^h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {$/;"	c
+h6	doxygen.css	/^  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }$/;"	s
+h6	doxygen.css	/^h1, h2, h3, h4, h5, h6 {$/;"	s
+h6.glow	doxygen.css	/^h1.glow, h2.glow, h3.glow, h4.glow, h5.glow, h6.glow {$/;"	c
+hr	doxygen.css	/^hr {$/;"	s
+hr.footer	doxygen.css	/^hr.footer {$/;"	c
+i2c_ack_wait	i2cmaster.S	/^i2c_ack_wait:$/;"	l
+i2c_delay_T2	i2cmaster.S	/^i2c_delay_T2:        ; 3 cycles$/;"	l
+i2c_get_ack	i2cmaster.S	/^i2c_get_ack:$/;"	l
+i2c_init	i2cmaster.S	/^i2c_init:$/;"	l
+i2c_init	twimaster.c	/^void i2c_init(void)$/;"	f	typeref:typename:void
+i2c_put_ack	i2cmaster.S	/^i2c_put_ack:$/;"	l
+i2c_put_ack_high	i2cmaster.S	/^i2c_put_ack_high:$/;"	l
+i2c_put_ack_low	i2cmaster.S	/^i2c_put_ack_low:                ;else$/;"	l
+i2c_put_ack_wait	i2cmaster.S	/^i2c_put_ack_wait:$/;"	l
+i2c_read	i2cmaster.S	/^i2c_read:$/;"	l
+i2c_read	i2cmaster.h	/^#define i2c_read(/;"	d
+i2c_readAck	i2cmaster.S	/^i2c_readAck:$/;"	l
+i2c_readAck	twimaster.c	/^unsigned char i2c_readAck(void)$/;"	f	typeref:typename:unsigned char
+i2c_readNak	i2cmaster.S	/^i2c_readNak:$/;"	l
+i2c_readNak	twimaster.c	/^unsigned char i2c_readNak(void)$/;"	f	typeref:typename:unsigned char
+i2c_read_bit	i2cmaster.S	/^i2c_read_bit:$/;"	l
+i2c_read_stretch	i2cmaster.S	/^i2c_read_stretch:$/;"	l
+i2c_rep_start	i2cmaster.S	/^i2c_rep_start:$/;"	l
+i2c_rep_start	twimaster.c	/^unsigned char i2c_rep_start(unsigned char address)$/;"	f	typeref:typename:unsigned char
+i2c_start	i2cmaster.S	/^i2c_start:$/;"	l
+i2c_start	twimaster.c	/^unsigned char i2c_start(unsigned char address)$/;"	f	typeref:typename:unsigned char
+i2c_start_wait	i2cmaster.S	/^i2c_start_wait:$/;"	l
+i2c_start_wait	twimaster.c	/^void i2c_start_wait(unsigned char address)$/;"	f	typeref:typename:void
+i2c_start_wait1	i2cmaster.S	/^i2c_start_wait1:$/;"	l
+i2c_start_wait_done	i2cmaster.S	/^i2c_start_wait_done:$/;"	l
+i2c_stop	i2cmaster.S	/^i2c_stop:$/;"	l
+i2c_stop	twimaster.c	/^void i2c_stop(void)$/;"	f	typeref:typename:void
+i2c_write	i2cmaster.S	/^i2c_write:$/;"	l
+i2c_write	twimaster.c	/^unsigned char i2c_write( unsigned char data )$/;"	f	typeref:typename:unsigned char
+i2c_write_bit	i2cmaster.S	/^i2c_write_bit:$/;"	l
+i2c_write_first	i2cmaster.S	/^i2c_write_first:$/;"	l
+i2c_write_high	i2cmaster.S	/^i2c_write_high:$/;"	l
+i2c_write_low	i2cmaster.S	/^i2c_write_low:$/;"	l
+img.footer	doxygen.css	/^img.footer {$/;"	c
+img.formulaDsp	doxygen.css	/^img.formulaDsp {$/;"	c
+img.formulaInl	doxygen.css	/^img.formulaInl {$/;"	c
+lcd_cmd	pld-usbc-meter-serial-firmware.c	/^void lcd_cmd(uint8_t db)$/;"	f	typeref:typename:void
+lcd_data	pld-usbc-meter-serial-firmware.c	/^void lcd_data(uint8_t db)$/;"	f	typeref:typename:void
+lcd_puts	pld-usbc-meter-serial-firmware.c	/^void lcd_puts(uint8_t *s)$/;"	f	typeref:typename:void
+main	pld-usbc-meter-serial-firmware.c	/^int main( void ) {$/;"	f	typeref:typename:int
+main	test_i2cmaster.c	/^int main(void)$/;"	f	typeref:typename:int
+main	test_i2cmaster.s	/^main:$/;"	l
+navrow1	manual__i2cmaster.html	/^  <div id="navrow1" class="tabs">$/;"	I
+p	doxygen.css	/^body, table, div, p, dl {$/;"	s
+p.enddd	doxygen.css	/^p.enddd {$/;"	c
+p.endli	doxygen.css	/^p.endli {$/;"	c
+p.endtd	doxygen.css	/^p.endtd {$/;"	c
+p.formulaDsp	doxygen.css	/^p.formulaDsp {$/;"	c
+p.startdd	doxygen.css	/^p.startli, p.startdd {$/;"	c
+p.startli	doxygen.css	/^p.startli, p.startdd {$/;"	c
+p.starttd	doxygen.css	/^p.starttd {$/;"	c
+pld-usbc-meter-serial-firmware	Makefile	/^pld-usbc-meter-serial-firmware: pld-usbc-meter-serial-firmware.c $(OBJECTS)$/;"	t
+pre.fragment	doxygen.css	/^pre.fragment {$/;"	c
+program	Makefile	/^program : $(TARGET).hex$/;"	t
+projectname	manual__i2cmaster.html	/^   <div id="projectname">AVR-GCC Libraries$/;"	I
+serial_send_byte	pld-usbc-meter-serial-firmware.c	/^void serial_send_byte(uint8_t c)$/;"	f	typeref:typename:void
+serial_send_string	pld-usbc-meter-serial-firmware.c	/^void serial_send_string( const char *s ) {$/;"	f	typeref:typename:void
+span.ah	doxygen.css	/^div.ah, span.ah {$/;"	c
+span.charliteral	doxygen.css	/^span.charliteral {$/;"	c
+span.comment	doxygen.css	/^span.comment {$/;"	c
+span.keyword	doxygen.css	/^span.keyword {$/;"	c
+span.keywordflow	doxygen.css	/^span.keywordflow {$/;"	c
+span.keywordtype	doxygen.css	/^span.keywordtype {$/;"	c
+span.legend	doxygen.css	/^span.legend {$/;"	c
+span.lineno	doxygen.css	/^span.lineno {$/;"	c
+span.lineno a	doxygen.css	/^span.lineno a {$/;"	s
+span.lineno a:hover	doxygen.css	/^span.lineno a:hover {$/;"	s
+span.mlabel	doxygen.css	/^span.mlabel {$/;"	c
+span.mlabels	doxygen.css	/^span.mlabels {$/;"	c
+span.preprocessor	doxygen.css	/^span.preprocessor {$/;"	c
+span.stringliteral	doxygen.css	/^span.stringliteral {$/;"	c
+span.vhdlchar	doxygen.css	/^span.vhdlchar { $/;"	c
+span.vhdldigit	doxygen.css	/^span.vhdldigit { $/;"	c
+span.vhdlkeyword	doxygen.css	/^span.vhdlkeyword { $/;"	c
+span.vhdllogic	doxygen.css	/^span.vhdllogic { $/;"	c
+table	doxygen.css	/^body, table, div, p, dl {$/;"	s
+table.directory	doxygen.css	/^table.directory {$/;"	c
+table.doxtable	doxygen.css	/^table.doxtable {$/;"	c
+table.doxtable td	doxygen.css	/^table.doxtable td, table.doxtable th {$/;"	s
+table.doxtable th	doxygen.css	/^table.doxtable td, table.doxtable th {$/;"	s
+table.doxtable th	doxygen.css	/^table.doxtable th {$/;"	s
+table.fieldtable	doxygen.css	/^table.fieldtable {$/;"	c
+table.memberdecls	doxygen.css	/^table.memberdecls {$/;"	c
+table.mlabels	doxygen.css	/^table.mlabels {$/;"	c
+td.indexkey	doxygen.css	/^td.indexkey {$/;"	c
+td.indexvalue	doxygen.css	/^td.indexvalue {$/;"	c
+td.mlabels-left	doxygen.css	/^td.mlabels-left {$/;"	c
+td.mlabels-right	doxygen.css	/^td.mlabels-right {$/;"	c
+td.tiny	doxygen.css	/^td.tiny {$/;"	c
+th.dirtab	doxygen.css	/^th.dirtab {$/;"	c
+titlearea	manual__i2cmaster.html	/^<div id="titlearea">$/;"	I
+top	manual__i2cmaster.html	/^<div id="top"><!-- do not remove this div, it is closed by doxygen! -->$/;"	I
+tr.heading h2	doxygen.css	/^tr.heading h2 {$/;"	s
+tr.memlist	doxygen.css	/^tr.memlist {$/;"	c
