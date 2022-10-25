@@ -97,6 +97,17 @@ void i2c_init()
 
 
 }
+void i2c_wait_ack(void) {
+	uint8_t ack = 1;
+	sda_high();
+	scl_high();
+	H_DELAY;
+	while ( ack == 1) {
+		ack = read_SDA();
+	}
+	scl_low();
+}
+
 uint8_t i2c_write_byte(uint8_t data)
 {
 
@@ -131,6 +142,45 @@ uint8_t i2c_write_byte(uint8_t data)
 	H_DELAY;
 
 	return ack;
+
+}
+
+
+
+
+uint8_t i2c_write_byte_ackwait(uint8_t data)
+{
+
+	uint8_t i;
+
+	for(i=0;i<8;i++) {
+		scl_low();
+
+		if(data & 0x80) {
+			sda_high();
+		}else {
+			sda_low();	
+		}
+		H_DELAY;
+		scl_high();
+		H_DELAY;
+		data=data<<1;
+	}
+
+	// Data has been sent, now listen for the ACK
+	//
+	scl_low();
+	H_DELAY;
+
+	scl_high();		
+	//	H_DELAY; // optional
+	while (read_SCL()==0);
+
+	i2c_wait_ack();
+
+	H_DELAY;
+
+	return 0;
 
 }
 
@@ -219,35 +269,30 @@ uint8_t i2c_start_wait( uint8_t addr ) {
 
 void lcd_cmd80(uint8_t db)
 {
-	i2c_write_byte(0x80);
-	_delay_ms(1);
-	i2c_write_byte(db);
+	i2c_write_byte_ackwait(0x80);
+	i2c_write_byte_ackwait(db);
 }
 
 void lcd_cmd0(uint8_t db)
 {
-	i2c_write_byte(0x00);
-	i2c_write_byte(db);
+	i2c_write_byte_ackwait(0x00);
+	i2c_write_byte_ackwait(db);
 }
 
 void lcd_cmd(uint8_t db)
 {
 	i2c_start_wait(LCD +I2C_WRITE);
-	_delay_ms(1);
-	i2c_write_byte(0x80);
-	_delay_ms(1);
-	i2c_write_byte(db);
+	i2c_write_byte_ackwait(0x80);
+	i2c_write_byte_ackwait(db);
 	i2c_stop();
-	_delay_ms(1);
 }
 
 void lcd_data(uint8_t db)
 {
 	i2c_start_wait(LCD+I2C_WRITE);
-	i2c_write_byte(0x40);
-	i2c_write_byte(db);
+	i2c_write_byte_ackwait(0x40);
+	i2c_write_byte_ackwait(db);
 	i2c_stop();
-	_delay_ms(1);
 }
 
 void lcd_puts(uint8_t *s)
@@ -262,7 +307,7 @@ void lcd_puts(uint8_t *s)
 void lcd_init(void) {	
 
 #define LCD_CONTRAST 0b110000 
-	i2c_start(LCD+I2C_WRITE);
+	i2c_start_wait(LCD+I2C_WRITE);
 	lcd_cmd80(0x38);
 	lcd_cmd80(0x39);
 	lcd_cmd80(0x1c);
@@ -271,8 +316,8 @@ void lcd_init(void) {
 	lcd_cmd80(0x6c);
 	lcd_cmd80(0x0c);
 	lcd_cmd80(0x01);
-	//	lcd_cmd80(0x06);
-	//	lcd_cmd80(0x02);
+//		lcd_cmd80(0x06);
+//		lcd_cmd80(0x02);
 	i2c_stop();
 }
 
@@ -294,18 +339,26 @@ int main( void ) {
 	PORTB.DIR |= (1<< PIN0_bp);
 	PORTB.OUT |= (1<< PIN0_bp); // serial output port, so push it high by default
 
+
+
 	// Initialise the I2C SCL / SDA pair
 	//
 	i2c_init();
 
 
 
-	_delay_ms(100); // we have to wait for the LCD to get ready, usually 40ms.
-						 //
+	// LCD RST line
+	//
+	PORTA.DIR |= (1<< PIN1_bp);
+	PORTA.OUT |= (1<< PIN1_bp);
+	_delay_ms(20);
+	PORTA.OUT &= ~(1<< PIN1_bp);
+	_delay_ms(20);
+	PORTA.OUT |= (1<< PIN1_bp);
+	_delay_ms(20);
+
 	lcd_init();
-	_delay_ms(40);
-	lcd_init();
-	_delay_ms(40);
+	_delay_ms(50);
 
 	lcd_puts((uint8_t *)"PLD-USBC");
 	lcd_cmd(0xC0);	// ADDR=0x40

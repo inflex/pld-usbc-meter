@@ -2,7 +2,7 @@
 
 MCU=attiny414
 NAME=main
-UART=/dev/ttyUSB0
+UART=/dev/ttyUSB2
 
 
 echo "Compiling..."
