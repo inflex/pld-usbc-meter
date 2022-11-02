@@ -29,8 +29,30 @@
 
 
 #define INA219 (0x40 << 1)
-#define LCD (0x3E <<1)
 
+#define LCD_D4_HIGH (PORTA.OUTSET = (1<<PIN4_bp))
+#define LCD_D5_HIGH (PORTA.OUTSET = (1<<PIN5_bp))
+#define LCD_D6_HIGH (PORTA.OUTSET = (1<<PIN6_bp))
+#define LCD_D7_HIGH (PORTA.OUTSET = (1<<PIN7_bp))
+
+#define LCD_D4_LOW (PORTA.OUTCLR = (1<<PIN4_bp))
+#define LCD_D5_LOW (PORTA.OUTCLR = (1<<PIN5_bp))
+#define LCD_D6_LOW (PORTA.OUTCLR = (1<<PIN6_bp))
+#define LCD_D7_LOW (PORTA.OUTCLR = (1<<PIN7_bp))
+
+#define LCD_E_HIGH (PORTB.OUTSET = (1<<PIN3_bp))
+#define LCD_RW_HIGH (PORTB.OUTSET = (1<<PIN2_bp))
+#define LCD_RS_HIGH (PORTB.OUTSET = (1<<PIN1_bp))
+
+#define LCD_E_LOW (PORTB.OUTCLR = (1<<PIN3_bp))
+#define LCD_RW_LOW (PORTB.OUTCLR = (1<<PIN2_bp))
+#define LCD_RS_LOW (PORTB.OUTCLR = (1<<PIN1_bp))
+
+#define LCD_BUSY_FLAG (PORTA.IN & (1<<PIN7_bp))
+
+#define LCD_CLK_DELAY (_delay_us(100))
+#define LCD_E_DELAY (_delay_us(1))
+#define LCD_E_PULSE (LCD_E_HIGH, LCD_E_DELAY, LCD_E_LOW)
 
 void tx_byte( uint8_t b ) {
 	uint8_t bc = 8; // 8 bits to shove out
@@ -86,6 +108,7 @@ void scl_low(void) {
 
 #define Q_DELAY _delay_loop_2(3)
 #define H_DELAY _delay_loop_2(5)
+
 
 void i2c_init()
 {
@@ -267,20 +290,188 @@ uint8_t i2c_start_wait( uint8_t addr ) {
 
 
 
-void lcd_cmd80(uint8_t db)
-{
-	i2c_write_byte_ackwait(0x80);
-	i2c_write_byte_ackwait(db);
+int lcd_write_byte( uint8_t d, int mode ) {
+
+
+	if ( mode == 0 ) {
+		LCD_RS_LOW;
+		LCD_RW_LOW;
+	} else {
+		LCD_RS_HIGH;
+		LCD_RW_LOW;
+	}
+
+	if (d & 0x80) LCD_D7_HIGH; else LCD_D7_LOW;
+	if (d & 0x40) LCD_D6_HIGH; else LCD_D6_LOW;
+	if (d & 0x20) LCD_D5_HIGH; else LCD_D5_LOW;
+	if (d & 0x10) LCD_D4_HIGH; else LCD_D4_LOW;
+	LCD_E_HIGH;
+	LCD_E_DELAY;
+	LCD_E_LOW;
+
+
+	if (d & 0x08) LCD_D7_HIGH; else LCD_D7_LOW;
+	if (d & 0x04) LCD_D6_HIGH; else LCD_D6_LOW;
+	if (d & 0x02) LCD_D5_HIGH; else LCD_D5_LOW;
+	if (d & 0x01) LCD_D4_HIGH; else LCD_D4_LOW;
+	LCD_E_HIGH;
+	LCD_E_DELAY;
+	LCD_E_LOW;
+
+	
+	LCD_D7_HIGH;
+	LCD_D6_HIGH;
+	LCD_D5_HIGH;
+	LCD_D4_HIGH;
+
+	if (mode != 0) {
+		LCD_RS_LOW;
+	}
 }
 
-void lcd_cmd0(uint8_t db)
-{
-	i2c_write_byte_ackwait(0x00);
-	i2c_write_byte_ackwait(db);
+int lcd_read( uint8_t rs ) {
+	uint8_t data = 0;
+
+	if (rs == 1) LCD_RS_HIGH;
+	else LCD_RS_LOW;
+
+	LCD_RW_HIGH;
+	PORTA.DIRCLR = (1<<PIN4_bp)|(1<<PIN5_bp)|(1<<PIN6_bp)|(1<<PIN7_bp);
+
+	LCD_E_HIGH;
+	LCD_CLK_DELAY;
+	if (PORTA.IN & (1<<PIN7_bp)) data |= 0x80;
+	if (PORTA.IN & (1<<PIN6_bp)) data |= 0x40;
+	if (PORTA.IN & (1<<PIN5_bp)) data |= 0x20;
+	if (PORTA.IN & (1<<PIN4_bp)) data |= 0x10;
+	LCD_E_LOW;
+	LCD_E_DELAY;
+
+
+	LCD_E_HIGH;
+	LCD_E_DELAY;
+	if (PORTA.IN & (1<<PIN7_bp)) data |= 0x08;
+	if (PORTA.IN & (1<<PIN6_bp)) data |= 0x04;
+	if (PORTA.IN & (1<<PIN5_bp)) data |= 0x02;
+	if (PORTA.IN & (1<<PIN4_bp)) data |= 0x01;
+	LCD_E_LOW;
+
+	PORTA.DIRSET = (1<<PIN4_bp)|(1<<PIN5_bp)|(1<<PIN6_bp)|(1<<PIN7_bp);
+
+	LCD_RW_LOW;
+
+	return data;
+
+}
+
+int lcd_wait_if_busy(void) { 
+
+	uint8_t d;
+	while (1) {
+		d = lcd_read(0);
+		if ((d & 0x80) == 0) break;
+	}
+	LCD_CLK_DELAY;
+	d = lcd_read(0);
+
+	return d; // address counter is returned
+}
+
+void lcd_write_cmd( uint8_t cmd ) {
+	lcd_wait_if_busy();
+	lcd_write_byte( cmd, 0 );
+}
+
+void lcd_write_data( uint8_t data ) {
+	lcd_wait_if_busy();
+	lcd_write_byte( data, 1 );
+}
+
+void lcd_write_str( char *s ) {
+	while (*s) {
+		lcd_write_data(*s);
+		s++;
+	}
+}
+
+void lcd_gotoline( uint8_t line ) {
+	if ( line == 0 ) {
+		lcd_write_cmd( 0x80 + 0x00 );
+	} else if (line == 1) {
+		lcd_write_cmd( 0x80 + 0x40 );
+	}
 }
 
 
+void lcd_init( void ) {
+	// Set our data pins D4:7 to outputs
+	//
+	PORTA.DIR |= (1<<PIN4_bp)|(1<<PIN5_bp)|(1<<PIN6_bp)|(1<<PIN7_bp);
 
+	// Set our control lines (E, RS, RW) to outputs
+	//
+	PORTB.DIR |= (1<<PIN3_bp)|(1<<PIN2_bp)|(1<<PIN1_bp);
+
+	// Prep the control lines
+	//
+	LCD_RS_LOW;
+	LCD_RW_LOW;
+	LCD_E_LOW;
+
+	// Set the initial function request; we don't use
+	// the _write_cmd() call yet because it wants to
+	// check for the busy flag
+	//
+	// This initial 0x3 value for FunctionSet will push
+	// the LCD in to using 4-bit/nibble mode
+	// 
+	LCD_D7_LOW;
+	LCD_D6_LOW;
+	LCD_D5_HIGH;
+	LCD_D4_HIGH;
+	
+	LCD_E_PULSE;
+	_delay_ms(20);
+
+	// Repeat
+	//
+	LCD_E_PULSE;
+	_delay_ms(2);
+
+	// Repeat
+	//
+	LCD_E_PULSE;
+	_delay_ms(2);
+
+	// Now drop the 0th bit on the high nibble for 'DL' 
+	// to indicate that we want to move to 4-bit mode
+	//
+	LCD_D4_LOW;
+	LCD_E_PULSE;
+	_delay_ms(40);
+
+
+	// Now we can start issueing commands with the busy flag
+	// response being available
+	//
+	lcd_write_cmd(0x0C); // display on, cursor off, blink off
+	_delay_us(100);
+
+	lcd_write_cmd(0x06); // new data increments position in DDRAM
+	_delay_ms(2);
+
+	lcd_write_cmd(0x01); // clear LCD and set home
+	_delay_ms(2);
+
+}
+
+void lcd_clrscr( void ) { 
+	lcd_write_cmd( 0x01 ); // moves address back to top-left of LCD and sets all data to spaces
+}
+
+void lcd_home( void ) {
+	lcd_write_cmd( 0x02 ); // moves address back to top-left only
+}
 
 int main( void ) {
 
@@ -290,15 +481,12 @@ int main( void ) {
 	uint8_t bus_high, bus_low;
 	uint8_t lcd_loop_count = 0;
 
-
-
+	lcd_init();
 
 	// Serial port output
 	//
 	PORTB.DIR |= (1<< PIN0_bp);
 	PORTB.OUT |= (1<< PIN0_bp); // serial output port, so push it high by default
-
-
 
 	// Initialise the I2C SCL / SDA pair
 	//
@@ -309,23 +497,6 @@ int main( void ) {
 
 	while (1) {
 		uint8_t a;
-
-
-		/*
-		 * Check to see if you can read the default
-		 * settings register, which should be 0x399F
-		 *
-		 *
-		 i2c_start(INA219|I2C_WRITE);
-		 a = i2c_write_byte(0x00);
-		 i2c_start_rep( INA219|I2C_READ );
-		 shunt_high = i2c_read_byte(1);
-		 shunt_low = i2c_read_byte(0);
-		 i2c_stop();
-
-		 snprintf(outs,sizeof(outs),"ack = %d id: %02x %02x ", a, shunt_high, shunt_low );
-		 serial_send_string( outs );
-		 */
 
 		i2c_start(INA219|I2C_WRITE);
 		i2c_write_byte(0x01);
@@ -365,27 +536,24 @@ int main( void ) {
 			voltage = v;
 			v = voltage /1000;
 			dv = voltage -(v *1000);
-			snprintf(outs,9,"%2lu.%03luV ", v, dv);
 
 			if (((v == 0) && (dv < 200)) || ((bus_low & 0x01)==1)) {
-				snprintf(outs,9,"-       ");
-				/*
-				lcd_cmd(0b00000010); // Go home
-				lcd_puts((uint8_t *)outs);
-				lcd_cmd(0b11000000);	// ADDR=0x40
-				lcd_puts((uint8_t *)outs);
-				*/
+				snprintf(outs,17,"-               ");
+				lcd_home();
+				lcd_write_str(outs);
+				lcd_gotoline(1);
+				lcd_write_str(outs);
 
 			} else {
 
-//				lcd_cmd(0b00000010); // Go home
+				snprintf(outs,17,"%2lu.%03luV ", v, dv);
+				lcd_home();
+				lcd_write_str(outs);
 				_delay_ms(3);
-				outs[8] = 0;
-//				lcd_puts((uint8_t *)outs);
+
 
 				uint32_t abs_current;
 
-				lcd_cmd(0b11000000);	// ADDR=0x40
 				current_reg = (shunt_high << 8) + shunt_low; // compose the register
 				current = current_reg ; // 0.05R shunt, so I = V/R, I = shunt voltage / 0.05 => I = shunt_voltage *20;
 				current = current *20;
@@ -394,11 +562,12 @@ int main( void ) {
 				else abs_current = current;
 				v = abs_current /1000;
 				dv = abs_current -(v *1000);
-				if (current < 0) snprintf(outs,9,">%1lu.%03luA>", v, dv);
-				else snprintf(outs,9,"<%1lu.%03luA<", v, dv);
+				if (current > 0) snprintf(outs,17,">%1lu.%03luA        >", v, dv);
+				else snprintf(outs,17,"<%1lu.%03luA        <", v, dv);
 
-				outs[8] = 0;
-//				lcd_puts((uint8_t *)outs);
+				outs[16] = 0;
+				lcd_gotoline(1);
+				lcd_write_str(outs);
 			}
 
 		} // lcd_loop_count == 0;
