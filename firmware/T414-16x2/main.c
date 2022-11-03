@@ -28,244 +28,10 @@
 #include <avr/power.h>
 
 #include "pld-lcd.h"
+#include "pld-uart.h"
+#include "pld-i2c.h"
 
 #define INA219 (0x40 << 1)
-void tx_byte( uint8_t b ) {
-	uint8_t bc = 8; // 8 bits to shove out
-	PORTB.OUT &= ~(1<< PIN0_bp); // signify start of data
-	_delay_us(100);
-	while (bc--) {
-		if ((b & 0x01) == 1) { 
-			PORTB.OUT |= (1<< PIN0_bp);
-		}
-		if ((b & 0x01) == 0) {
-			PORTB.OUT &= ~(1<< PIN0_bp);
-		}
-		b = b >> 1;
-		_delay_us(100);
-	}
-	PORTB.OUT |= (1<< PIN0_bp);
-	_delay_us(100);
-}
-
-void serial_send_string( const char *s ) {
-	while (*s) {
-		tx_byte(*s);
-		_delay_ms(1);
-		s++;
-	}
-}
-
-#define I2C_READ 1
-#define I2C_WRITE 0
-
-uint8_t read_SDA (void) {
-	return (PORTA.IN & (1<<PIN2_bp));
-}
-void sda_high(void) {
-	PORTA.DIRCLR = (1<<PIN2_bp);
-	PORTA.OUTCLR = (1<<PIN2_bp);
-}
-void sda_low(void) {
-	PORTA.DIRSET = (1 << PIN2_bp);
-}
-
-uint8_t read_SCL(void) {
-	return (PORTA.IN & (1<<PIN3_bp));
-}
-void scl_high(void) {
-	PORTA.DIRCLR = (1<<PIN3_bp);
-	PORTA.OUTCLR = (1<<PIN3_bp);
-}
-void scl_low(void) {
-	PORTA.DIRSET = (1 << PIN3_bp);
-}
-
-
-#define Q_DELAY _delay_loop_2(3)
-#define H_DELAY _delay_loop_2(5)
-
-
-void i2c_init()
-{
-	sda_high();	
-	scl_high();	
-
-	PORTA.OUT &= ~(1<<PIN2_bp);
-	PORTA.OUT &= ~(1<<PIN3_bp);
-
-
-}
-void i2c_wait_ack(void) {
-	uint8_t ack = 1;
-	sda_high();
-	scl_high();
-	H_DELAY;
-	while ( ack == 1) {
-		ack = read_SDA();
-	}
-	scl_low();
-}
-
-uint8_t i2c_write_byte(uint8_t data)
-{
-
-	uint8_t i;
-
-	for(i=0;i<8;i++) {
-		scl_low();
-
-		if(data & 0x80) {
-			sda_high();
-		}else {
-			sda_low();	
-		}
-		H_DELAY;
-		scl_high();
-		H_DELAY;
-		data=data<<1;
-	}
-
-	// Data has been sent, now listen for the ACK
-	//
-	scl_low();
-	H_DELAY;
-
-	scl_high();		
-	//	H_DELAY; // optional
-	while (read_SCL()==0);
-
-	uint8_t ack;
-	ack = read_SDA();
-
-	H_DELAY;
-
-	return ack;
-
-}
-
-
-
-
-uint8_t i2c_write_byte_ackwait(uint8_t data)
-{
-
-	uint8_t i;
-
-	for(i=0;i<8;i++) {
-		scl_low();
-
-		if(data & 0x80) {
-			sda_high();
-		}else {
-			sda_low();	
-		}
-		H_DELAY;
-		scl_high();
-		H_DELAY;
-		data=data<<1;
-	}
-
-	// Data has been sent, now listen for the ACK
-	//
-	scl_low();
-	H_DELAY;
-
-	scl_high();		
-	//	H_DELAY; // optional
-	while (read_SCL()==0);
-
-	i2c_wait_ack();
-
-	H_DELAY;
-
-	return 0;
-
-}
-
-
-
-
-void i2c_stop()
-{
-	scl_low();
-	sda_low();
-	H_DELAY;
-	scl_high();
-	Q_DELAY;
-	sda_high();
-	H_DELAY;
-}
-
-
-uint8_t i2c_read_byte(uint8_t ack)
-{
-	uint8_t data=0x00;
-	uint8_t i;
-
-	for(i=0;i<8;i++)
-	{
-
-		scl_low();
-		sda_high(); // Without this, the uC sent ACK doesn't seem to work
-		H_DELAY;
-		scl_high();
-		H_DELAY;
-
-		//		while(read_SCL()==0);
-
-		if (read_SDA()) data |= 1;
-		if (i < 7) data <<= 1;
-
-	}
-
-	scl_low();
-	if (ack == 1) sda_low();
-	else sda_high();
-	H_DELAY;
-	scl_high();
-
-	while ( read_SCL() == 0 ); // wait for slave to finish if it's stretching
-
-	H_DELAY;
-
-	return data;
-
-}
-
-
-uint8_t i2c_start( uint8_t addr ) {
-	sda_low();
-	Q_DELAY;
-	return i2c_write_byte(addr);
-}
-
-uint8_t i2c_start_rep( uint8_t addr ) {
-	scl_low();
-	sda_high();
-	H_DELAY;
-	scl_high();
-	Q_DELAY;
-	sda_low();
-	Q_DELAY;
-
-	return i2c_write_byte(addr);
-}
-
-
-uint8_t i2c_start_wait( uint8_t addr ) {
-	while ( 1 ) {
-		sda_low();
-		H_DELAY;
-		if (i2c_write_byte(addr) == 0) break;
-		i2c_stop();
-	}
-	return 0;
-}
-
-
-
-
 
 int main( void ) {
 
@@ -289,7 +55,7 @@ int main( void ) {
 	i2c_init();
 
 
-	serial_send_string("\r\nPLD-UCM4-T414\r\n");
+	uart_send_string("\r\nPLD-UCM4-T414\r\n");
 
 	while (1) {
 		uint8_t a;
@@ -309,7 +75,7 @@ int main( void ) {
 		i2c_stop();
 
 		snprintf(outs,sizeof(outs),"%02x%02x%02x%02x\n", shunt_high, shunt_low, bus_high, bus_low );
-		serial_send_string( outs );
+		uart_send_string( outs );
 
 
 		if (lcd_loop_count == 0) {
