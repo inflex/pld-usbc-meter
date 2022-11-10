@@ -2,7 +2,7 @@
 
 MCU=attiny414
 NAME=main
-UART=/dev/ttyUSB2
+UART=/dev/ttyUSB0
 
 
 echo "Compiling..."
@@ -42,11 +42,11 @@ if [ $? -ne 0 ]; then
 	fi
 
 
-#echo "Exiting out of programming mode..."
-#pymcuprog -d ${MCU} -t uart -u ${UART} reset
-#if [ $? -ne 0 ]; then
-#	exit
-#	fi
+echo "Exiting out of programming mode..."
+pymcuprog -d ${MCU} -t uart -u ${UART} reset
+if [ $? -ne 0 ]; then
+	exit
+fi
 
 
 echo "Completed"
