@@ -614,6 +614,7 @@ int main ( int argc, char **argv ) {
 	 double a_min, a_max;
 
 
+	 int missed_frames = 0;
 
 
 	 while (!quit) {
@@ -633,6 +634,16 @@ int main ( int argc, char **argv ) {
 		  ssize_t bytes_read = 0;
 		  ssize_t sz;
 
+
+		 missed_frames++;
+		 if (missed_frames > 5) {
+			 close(g.serial_params.fd);
+				find_port_result = find_port(&g.serial_params);
+				 if (find_port_result != PORT_OK) {
+					 sleep(1);
+					 continue;
+			 }
+		 }
 
 		  while (SDL_PollEvent(&event)) {
 				switch (event.type)
@@ -715,6 +726,8 @@ int main ( int argc, char **argv ) {
 		  if (!end_of_frame_received)  {
 				continue;
 		  }
+
+		  missed_frames = 0;
 
 
 		  char tmpc = serial_buffer[4];
