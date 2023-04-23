@@ -5,6 +5,8 @@ NAME=main
 UART=/dev/ttyUSB0
 
 
+set -x
+
 echo "Compiling..."
 avr-gcc -Os -c -mmcu=${MCU} ${NAME}.c
 if [ $? -ne 0 ]; then
@@ -42,11 +44,11 @@ if [ $? -ne 0 ]; then
 	fi
 
 
-#echo "Exiting out of programming mode..."
-#pymcuprog -d ${MCU} -t uart -u ${UART} reset
-#if [ $? -ne 0 ]; then
-#	exit
-#	fi
+echo "Exiting out of programming mode..."
+pymcuprog -d ${MCU} -t uart -u ${UART} reset
+if [ $? -ne 0 ]; then
+	exit
+fi
 
 
 echo "Completed"
